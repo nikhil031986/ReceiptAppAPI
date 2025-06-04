@@ -1,0 +1,498 @@
+[
+  {
+    "ContainingType": "Receipt.API.Controllers.CustomerController",
+    "Method": "AddCustomer",
+    "RelativePath": "api/Customer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customer",
+        "Type": "Receipt.Domain.Entity.CustomerMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.CustomerController",
+    "Method": "DeActivate",
+    "RelativePath": "api/Customer/DeActivate/{customerId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.CustomerController",
+    "Method": "DeleteCustomer",
+    "RelativePath": "api/Customer/DeleteCustomer/{customerId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.CustomerController",
+    "Method": "GetCustomer",
+    "RelativePath": "api/Customer/GetCustomer",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.CustomerController",
+    "Method": "GetCustomerById",
+    "RelativePath": "api/Customer/GetCustomerById/{CustomerId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CustomerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.CustomerController",
+    "Method": "UpdateSite",
+    "RelativePath": "api/Customer/UpdateCustomer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customer",
+        "Type": "Receipt.Domain.Entity.CustomerMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.ReceipDetailsController",
+    "Method": "AddReceiptDetails",
+    "RelativePath": "api/ReceipDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiptDetail",
+        "Type": "Receipt.Domain.Entity.ReceiptDetail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.ReceipDetailsController",
+    "Method": "DeActivate",
+    "RelativePath": "api/ReceipDetails/DeActivate/{receiptId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiptId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.ReceipDetailsController",
+    "Method": "GetAllReceiptDetails",
+    "RelativePath": "api/ReceipDetails/GetAllReceiptDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.ReceipDetailsController",
+    "Method": "GetReceiptDetailsByCustomerId",
+    "RelativePath": "api/ReceipDetails/GetReceiptDetailsByCustomerId/{customerId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.ReceipDetailsController",
+    "Method": "GetReceiptDetailsById",
+    "RelativePath": "api/ReceipDetails/GetReceiptDetailsById/{receiptId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiptId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.ReceipDetailsController",
+    "Method": "UpdateReceiptDetails",
+    "RelativePath": "api/ReceipDetails/UpdateReceiptDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiptDetail",
+        "Type": "Receipt.Domain.Entity.ReceiptDetail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.SiteController",
+    "Method": "AddSite",
+    "RelativePath": "api/Site",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "siteMaster",
+        "Type": "Receipt.Domain.Entity.SiteMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.SiteController",
+    "Method": "DeActivate",
+    "RelativePath": "api/Site/DeActivate/{siteId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "siteId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.SiteController",
+    "Method": "GetSite",
+    "RelativePath": "api/Site/GetSite",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.SiteController",
+    "Method": "GetSiteById",
+    "RelativePath": "api/Site/GetSiteById/{siteId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "siteId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.SiteController",
+    "Method": "UpdateSite",
+    "RelativePath": "api/Site/UpdateSite/{siteId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "siteId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "siteMaster",
+        "Type": "Receipt.Domain.Entity.SiteMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.UserMasterController",
+    "Method": "AddUser",
+    "RelativePath": "api/UserMaster",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userMaster",
+        "Type": "Receipt.Domain.Entity.UserMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.UserMasterController",
+    "Method": "DeActivate",
+    "RelativePath": "api/UserMaster/DeActivate/{userMasterId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userMasterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.UserMasterController",
+    "Method": "GetUser",
+    "RelativePath": "api/UserMaster/GetUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.UserMasterController",
+    "Method": "GetUserByEmailAndPassword",
+    "RelativePath": "api/UserMaster/GetUserByEmailAndPassword",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "emailId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.UserMasterController",
+    "Method": "Login",
+    "RelativePath": "api/UserMaster/Login",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "emailId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.UserMasterController",
+    "Method": "Logout",
+    "RelativePath": "api/UserMaster/Logout",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.UserMasterController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/UserMaster/UpdateUser/{userMasterId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userMasterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userMaster",
+        "Type": "Receipt.Domain.Entity.UserMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.WingController",
+    "Method": "Addwing",
+    "RelativePath": "api/Wing",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wingMaster",
+        "Type": "Receipt.Domain.Entity.WingMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.WingController",
+    "Method": "DeActivate",
+    "RelativePath": "api/Wing/DeActivate/{wingMasterId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wingMasterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.WingController",
+    "Method": "Deletewing",
+    "RelativePath": "api/Wing/Deletewing/{wingMasterId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wingMasterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.WingController",
+    "Method": "GetAllwing",
+    "RelativePath": "api/Wing/GetAllwing",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.WingController",
+    "Method": "GetwingById",
+    "RelativePath": "api/Wing/GetwingById/{wingId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wingId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.WingController",
+    "Method": "GetWingDetails",
+    "RelativePath": "api/Wing/GetWingDetails/{wingMasterId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wingMasterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.WingController",
+    "Method": "GetWingDetailsById",
+    "RelativePath": "api/Wing/GetWingDetailsById/{wigDetailId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wigDetailId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Receipt.API.Controllers.WingController",
+    "Method": "Updatewing",
+    "RelativePath": "api/Wing/Updatewing",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wingMaster",
+        "Type": "Receipt.Domain.Entity.WingMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

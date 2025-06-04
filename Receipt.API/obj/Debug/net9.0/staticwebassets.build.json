@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "APT0mCKe2kdaygPf2SzFGD2+69npZD/sX4PEntlgIGg=",
+  "Source": "Receipt.API",
+  "BasePath": "_content/Receipt.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

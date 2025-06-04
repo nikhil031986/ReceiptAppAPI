@@ -1,0 +1,15 @@
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\bin\Debug\net9.0\Receipt.Application.deps.json
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\bin\Debug\net9.0\Receipt.Application.dll
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\bin\Debug\net9.0\Receipt.Application.pdb
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\bin\Debug\net9.0\Receipt.Domain.dll
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\bin\Debug\net9.0\Receipt.Domain.pdb
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\Receipt.Application.csproj.AssemblyReference.cache
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\Receipt.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\Receipt.Application.AssemblyInfoInputs.cache
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\Receipt.Application.AssemblyInfo.cs
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\Receipt.Application.csproj.CoreCompileInputs.cache
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\Receipt..CFBA3FC7.Up2Date
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\Receipt.Application.dll
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\refint\Receipt.Application.dll
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\Receipt.Application.pdb
+D:\NewReceiptApplication\Receipt.API\Receipt.Application\obj\Debug\net9.0\ref\Receipt.Application.dll
