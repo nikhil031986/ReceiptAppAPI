@@ -634,11 +634,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Application\\Receipt.Application.csproj",
+      "projectUniqueName": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\Receipt.Application.csproj",
       "projectName": "Receipt.Application",
-      "projectPath": "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Application\\Receipt.Application.csproj",
+      "projectPath": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\Receipt.Application.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Application\\obj\\",
+      "outputPath": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 23.2\\Components\\Offline Packages",
@@ -662,8 +662,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Domain\\Receipt.Domain.csproj": {
-              "projectPath": "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Domain\\Receipt.Domain.csproj"
+            "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Domain\\Receipt.Domain.csproj": {
+              "projectPath": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Domain\\Receipt.Domain.csproj"
             }
           }
         }
@@ -709,7 +709,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

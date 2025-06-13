@@ -553,11 +553,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Domain\\Receipt.Domain.csproj",
+      "projectUniqueName": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Domain\\Receipt.Domain.csproj",
       "projectName": "Receipt.Domain",
-      "projectPath": "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Domain\\Receipt.Domain.csproj",
+      "projectPath": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Domain\\Receipt.Domain.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Domain\\obj\\",
+      "outputPath": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 23.2\\Components\\Offline Packages",
@@ -624,7 +624,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

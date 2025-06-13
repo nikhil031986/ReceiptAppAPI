@@ -38,8 +38,8 @@ namespace Receipt.Domain.Entity
 
         public byte[] IsActive { get; set; } = null!;
 
-        public virtual CustomerMaster Customer { get; set; } = null!;
+        public virtual CustomerMaster? Customer { get; set; } = null!;
 
-        public virtual SiteMaster Site { get; set; } = null!;
+        public virtual SiteMaster? Site { get; set; } = null!;
     }
 }

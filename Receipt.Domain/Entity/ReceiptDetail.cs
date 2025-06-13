@@ -50,13 +50,13 @@ namespace Receipt.Domain.Entity
 
         public byte[] IsActive { get; set; } = null!;
 
-        public virtual UserMaster User { get; set; } = null!;
+        public virtual UserMaster? User { get; set; } = null!;
 
-        public virtual CustomerMaster Customer { get; set; } = null!;
+        public virtual CustomerMaster? Customer { get; set; } = null!;
 
-        public virtual WingDetail WingDetail { get; set; } = null!;
+        public virtual WingDetail? WingDetail { get; set; } = null!;
         
-        public virtual WingMaster WingMaster { get; set; } = null!;
+        public virtual WingMaster? WingMaster { get; set; } = null!;
     }
 
 }

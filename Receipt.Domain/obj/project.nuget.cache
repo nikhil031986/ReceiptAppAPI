@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Mje4X/+SGcw=",
+  "dgSpecHash": "0cFduUocUY8=",
   "success": true,
-  "projectFilePath": "D:\\NewReceiptApplication\\Receipt.API\\Receipt.Domain\\Receipt.Domain.csproj",
+  "projectFilePath": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Domain\\Receipt.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\9.0.3\\microsoft.aspnetcore.cryptography.internal.9.0.3.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\9.0.3\\microsoft.aspnetcore.cryptography.keyderivation.9.0.3.nupkg.sha512",

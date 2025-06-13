@@ -10,12 +10,12 @@ namespace Receipt.Infra.Repositories
         public async Task<CustomerMaster> AddCustomerAsync(CustomerMaster customer)
         {
             await dbContext.customerMasters.AddAsync(customer);
+            await dbContext.SaveChangesAsync();
             foreach (CustomerDetail cd in customer.CustomerDetails)
             {
                 cd.CustomerId = customer.CustomerMasterId; // Ensure the foreign key is set
                 await dbContext.customerDetails.AddAsync(cd);
             }
-            await dbContext.SaveChangesAsync();
             return customer;
         }
 
@@ -26,6 +26,7 @@ namespace Receipt.Infra.Repositories
             {
                 dbContext.customerDetails.Update(cd);
             }
+            await dbContext.SaveChangesAsync();
             return customer;
         }
 
@@ -65,10 +66,11 @@ namespace Receipt.Infra.Repositories
         public async Task<bool> DeActivateCustomer(int curentId)
         {
             var customer = await dbContext.customerMasters.SingleOrDefaultAsync(x=> x.CustomerMasterId==curentId);
-            if (customer == null)
+            if (customer != null)
             {
                 customer.IsActive = "0";
                 dbContext.customerMasters.Update(customer);
+                await dbContext.SaveChangesAsync();
                 return true;
             }
             return false;

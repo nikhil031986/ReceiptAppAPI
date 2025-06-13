@@ -17,6 +17,10 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> AddUser([FromBody] UserMaster userMaster)
         {
             var result = await sender.Send(new AddUserMasterCommand(userMaster));
+            if (result == null)
+            {
+                return BadRequest("User not added into system. Please try agen.");
+            }
             return Ok(result);
         }
 
@@ -25,6 +29,10 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> GetUser()
         {
             var result = await sender.Send(new GetAllUserQueries());
+            if (result == null || !result.Any())
+            {
+                return NotFound("No users found.");
+            }
             return Ok(result);
         }
 
@@ -32,6 +40,10 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> Login(string emailId,string password)
         {
             var result = await sender.Send(new TokenGeneratorQuerie(emailId, password));
+            if (result == null || result.Data == null)
+            {
+                return Unauthorized("Invalid email or password.");
+            }
             return Ok(result);
         }
 
@@ -40,6 +52,10 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> GetUserByEmailAndPassword(string emailId, string password)
         {
             var result = await sender.Send(new GetLoginQueries(emailId, password));
+            if (result == null)
+            {
+                return NotFound("User not found with the provided email and password.");
+            }
             return Ok(result);
         }
 
@@ -48,6 +64,10 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> UpdateUser([FromRoute]int userMasterId,[FromBody] UserMaster userMaster)
         {
             var result = await sender.Send(new UpdateUserCommand(userMasterId, userMaster));
+            if (result == null)
+            {
+                return BadRequest("User not updated into system. Please try agen.");
+            }
             return Ok(result);
         }
 
@@ -56,6 +76,10 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> DeActivate([FromRoute] int userMasterId)
         {
             var result = await sender.Send(new DeActiveUserCommand(userMasterId));
+            if (result == false)
+            {
+                return BadRequest("User not Deactivated into system. Please try agen.");
+            }
             return Ok(result);
         }
         [Authorize]

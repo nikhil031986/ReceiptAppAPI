@@ -40,10 +40,10 @@ namespace Receipt.Domain.Entity
 
         public virtual ICollection<CustomerDetail>? CustomerDetails { get; set; } = new List<CustomerDetail>();
 
-        public virtual SiteMaster Site { get; set; } = null!;
+        public virtual SiteMaster? Site { get; set; } = null!;
 
-        public virtual WingDetail WingDetail { get; set; } = null!;
+        public virtual WingDetail? WingDetail { get; set; } = null!;
 
-        public virtual WingMaster WingMaster { get; set; } = null!;
+        public virtual WingMaster? WingMaster { get; set; } = null!;
     }
 }

@@ -32,6 +32,7 @@ namespace Receipt.Infra.Repositories
         public async Task<ReceiptDetail> UpdateReceipt(int receiptId, ReceiptDetail receiptDetail)
         {
             appDbContext.receiptDetails.Update(receiptDetail);
+            await appDbContext.SaveChangesAsync();
             return receiptDetail;
         }
 

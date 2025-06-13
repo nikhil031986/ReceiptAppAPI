@@ -171,3 +171,6 @@ D:\NewReceiptApplication\Receipt.API\Receipt.API\bin\Debug\net9.0\Microsoft.Iden
 D:\NewReceiptApplication\Receipt.API\Receipt.API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\NewReceiptApplication\Receipt.API\Receipt.API\bin\Debug\net9.0\microsoft.identitymodel.dll
 D:\NewReceiptApplication\Receipt.API\Receipt.API\obj\Debug\net9.0\staticwebassets.build.json.cache
+D:\NewReceiptApplication\Receipt.API\Receipt.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\NewReceiptApplication\Receipt.API\Receipt.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\NewReceiptApplication\Receipt.API\Receipt.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
