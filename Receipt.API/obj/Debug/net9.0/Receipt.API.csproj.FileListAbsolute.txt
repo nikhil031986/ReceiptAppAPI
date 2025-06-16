@@ -348,10 +348,10 @@ D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\staticwebassets.buil
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\staticwebassets.build.json.cache
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\staticwebassets.development.json
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\Receipt..25B987EB.Up2Date
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\Receipt.API.dll
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\refint\Receipt.API.dll
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\Receipt.API.pdb
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\Receipt.API.genruntimeconfig.cache
 D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\ref\Receipt.API.dll
+D:\Nayan_Project\ReceiptAppAPI\Receipt.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
