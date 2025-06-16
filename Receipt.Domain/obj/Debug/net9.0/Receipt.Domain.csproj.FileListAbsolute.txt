@@ -10,3 +10,16 @@ D:\NewReceiptApplication\Receipt.API\Receipt.Domain\obj\Debug\net9.0\Receipt.Dom
 D:\NewReceiptApplication\Receipt.API\Receipt.Domain\obj\Debug\net9.0\refint\Receipt.Domain.dll
 D:\NewReceiptApplication\Receipt.API\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.pdb
 D:\NewReceiptApplication\Receipt.API\Receipt.Domain\obj\Debug\net9.0\ref\Receipt.Domain.dll
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\bin\Debug\net9.0\Receipt.Domain.deps.json
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\bin\Debug\net9.0\Receipt.Domain.dll
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\bin\Debug\net9.0\Receipt.Domain.pdb
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.csproj.AssemblyReference.cache
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.AssemblyInfoInputs.cache
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.AssemblyInfo.cs
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.csproj.CoreCompileInputs.cache
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.sourcelink.json
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.dll
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\refint\Receipt.Domain.dll
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\Receipt.Domain.pdb
+D:\Nayan_Project\ReceiptAppAPI\Receipt.Domain\obj\Debug\net9.0\ref\Receipt.Domain.dll
