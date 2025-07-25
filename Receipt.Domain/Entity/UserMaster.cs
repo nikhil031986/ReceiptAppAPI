@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Receipt.Domain.Entity
 {
-    public class UserMaster
+    public class UserMaster:BaseEntity
     {
         [Key]
         public int UserId { get; set; }
@@ -14,9 +14,6 @@ namespace Receipt.Domain.Entity
         public string Address { get; set; }
         public string Password { get; set; }
         public bool? IsAdmin { get; set; }
-        public string CreateDate { get; set; }
-        public bool IsActive { get; set; }
-
         public ICollection<SiteMaster> siteMasters { get;set; }
     }
 }

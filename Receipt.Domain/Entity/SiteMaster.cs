@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Receipt.Domain.Entity
 {
-    public partial class SiteMaster
+    public partial class SiteMaster:BaseEntity
     {
         [Key]
         public int SiteId { get; set; }
@@ -16,7 +16,6 @@ namespace Receipt.Domain.Entity
         public string Display_Name { get; set; }
         public string Address { get;set; }
         public string RegistrationDetails { get; set; }
-        public int UserId { get; set; }
         public UserMaster? User { get; set; }
 
     }

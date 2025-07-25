@@ -2,6 +2,7 @@
 using Receipt.Domain.Entity;
 using Receipt.Domain.Interfaces;
 using Receipt.Infra.Data;
+using System.Linq.Expressions;
 
 namespace Receipt.Infra.Repositories
 {
@@ -13,6 +14,20 @@ namespace Receipt.Infra.Repositories
                 Include(w => w.WingMaster).
                 Include(i => i.WingDetail).ToListAsync();
         }
+        public async Task<IEnumerable<ReceiptDetail>> GetDataFromDB(Expression<Func<ReceiptDetail, bool>> expression = null)
+        {             if (expression == null)
+            {
+                return await appDbContext.receiptDetails.Include(c => c.Customer).
+                    Include(w => w.WingMaster).
+                    Include(i => i.WingDetail).ToListAsync();
+            }
+            else
+            {
+                return await appDbContext.receiptDetails.Include(c => c.Customer).
+                    Include(w => w.WingMaster).
+                    Include(i => i.WingDetail).Where(expression).ToListAsync();
+            }
+        }
 
         public async Task<ReceiptDetail> GetReceipt(int receiptId)
         {
@@ -23,7 +38,7 @@ namespace Receipt.Infra.Repositories
 
         public async Task<ReceiptDetail> AddReceipt(ReceiptDetail receiptDetail)
         {
-            receiptDetail.UserId = 1;
+            receiptDetail.CreateuserId = 1;
             appDbContext.receiptDetails.Add(receiptDetail);
             await appDbContext.SaveChangesAsync();
             return receiptDetail;
@@ -36,12 +51,12 @@ namespace Receipt.Infra.Repositories
             return receiptDetail;
         }
 
-        public async Task<bool> DeActiveReceipt(int receiptId)
+        public async Task<bool> DeActivate(int receiptId)
         {
             var receiptData = await appDbContext.receiptDetails.Where(x => x.ReceiptId == receiptId).FirstOrDefaultAsync();
             if (receiptData != null)
             {
-                receiptData.IsActive = new byte[1] { 1 };
+                receiptData.IsActive = true;
                 appDbContext.receiptDetails.Update(receiptData);
                 return true;
             }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Receipt.Domain.Entity
 {
-    public partial class ReceiptDetail
+    public partial class ReceiptDetail:BaseEntity
     {
         [Key]
         public int ReceiptId { get; set; }
@@ -34,21 +34,13 @@ namespace Receipt.Domain.Entity
 
         public string? AmountInWord { get; set; }
 
-        public int UserId { get; set; }
-
-        public string? EntryDate { get; set; }
-
-        public string? UpdateDate { get; set; }
-
         public string? PaymentDate { get; set; }
 
-        public byte[]? IsCancel { get; set; }
+        public bool? IsCancel { get; set; }
 
-        public byte[]? IsPrint { get; set; }
+        public bool? IsPrint { get; set; }
 
         public int SiteId { get; set; }
-
-        public byte[] IsActive { get; set; } = null!;
 
         public virtual UserMaster? User { get; set; } = null!;
 

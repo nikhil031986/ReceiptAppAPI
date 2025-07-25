@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Receipt.Domain.Entity
 {
-    public partial class  CustomerMaster
+    public partial class  CustomerMaster:BaseEntity
     {
         [Key]
         public int CustomerMasterId { get; set; }
@@ -18,7 +18,7 @@ namespace Receipt.Domain.Entity
 
         public int SiteId { get; set; }
 
-        public byte[]? IsBanakhat { get; set; }
+        public bool? IsBanakhat { get; set; }
 
         public string? BanakhatNumber { get; set; }
 
@@ -29,14 +29,6 @@ namespace Receipt.Domain.Entity
         public string? DastavgNo { get; set; }
 
         public string? DastavgDate { get; set; }
-
-        public string? EntryDate { get; set; }
-
-        public int? UpdateDate { get; set; }
-
-        public int UserId { get; set; }
-
-        public string? IsActive { get; set; }
 
         public virtual ICollection<CustomerDetail>? CustomerDetails { get; set; } = new List<CustomerDetail>();
 

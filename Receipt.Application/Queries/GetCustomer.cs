@@ -16,7 +16,7 @@ namespace Receipt.Application.Queries
     {
         public async Task<IEnumerable<CustomerMaster>> Handle(GetCustomersCommand request, CancellationToken cancellationToken)
         {
-            return await customerRepositories.GetAllCustomersAsync();
+            return await customerRepositories.GetDataFromDB();
         }
     }
 
@@ -27,7 +27,8 @@ namespace Receipt.Application.Queries
     {
         public async Task<CustomerMaster> Handle(GetCustomerByIdCommand request, CancellationToken cancellationToken)
         {
-            return await customerRepositories.GetCustomerByIdAsync(request.customerId);
+            var dbData = await customerRepositories.GetDataFromDB(x => x.CustomerMasterId == request.customerId);
+            return dbData.FirstOrDefault();
         }
     }
 }

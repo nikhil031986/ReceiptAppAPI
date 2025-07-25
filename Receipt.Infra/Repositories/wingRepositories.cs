@@ -42,11 +42,11 @@ namespace Receipt.Infra.Repositories
                     wing.StartNumber = wingMaster.StartNumber;
                     wing.EndNumber = wingMaster.EndNumber;
                     wing.SiteId = wingMaster.SiteId;
-                    wing.UserId = wingMaster.UserId;
-                    wing.EntryDate = wingMaster.EntryDate;
-                    wing.UpdateDate = wingMaster.UpdateDate;
+                    wing.CreateuserId = wingMaster.CreateuserId;
+                    wing.CreatedAt = wingMaster.CreatedAt;
+                    wing.UpdatedAt = wingMaster.UpdatedAt;
                     wing.IsActive = wingMaster.IsActive;
-                    wingMaster.IsActive = wingMaster.IsActive ?? new byte[] { 1 }; // Default to active if not set
+                    wingMaster.IsActive = wingMaster.IsActive; // Default to active if not set
 
                     dbContext.DbwingMasters.Update(wing);
                     foreach (WingDetail wd in wingMaster.WingDetails)
@@ -98,7 +98,7 @@ namespace Receipt.Infra.Repositories
             var wing = await dbContext.DbwingMasters.FindAsync(wingMasterId);
             if(wing != null)
             {
-                wing.IsActive = new byte[] { 0 }; // Assuming IsActive is a property in WingMaster
+                wing.IsActive = true; // Assuming IsActive is a property in WingMaster
                 dbContext.DbwingMasters.Update(wing);
                 await dbContext.SaveChangesAsync();
                 return true;

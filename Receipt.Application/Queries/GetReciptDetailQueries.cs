@@ -26,7 +26,8 @@ namespace Receipt.Application.Queries
     {
         public async Task<ReceiptDetail> Handle(GetReceiptDetailQueries request, CancellationToken cancellationToken)
         {
-            return await receiptRepositories.GetReceipt(request.receiptId);
+            var receipt = await receiptRepositories.GetDataFromDB(x=> x.ReceiptId== request.receiptId);
+            return receipt.FirstOrDefault();
         }
     }
 

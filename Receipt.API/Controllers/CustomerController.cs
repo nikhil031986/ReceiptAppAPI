@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Receipt.API.Helpers;
 using Receipt.Application.Commands;
 using Receipt.Application.Queries;
 using Receipt.Domain.Entity;
@@ -10,6 +11,7 @@ namespace Receipt.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [AuthorizeAttributes]
     public class CustomerController(ISender sender) : Controller
     {
         [HttpPost("")]

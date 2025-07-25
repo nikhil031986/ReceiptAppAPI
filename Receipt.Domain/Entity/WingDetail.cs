@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Receipt.Domain.Entity
 {
-    public partial class WingDetail
+    public partial class WingDetail: BaseEntity
     {
         public int WingDetailId { get; set; }
 
@@ -39,14 +39,6 @@ namespace Receipt.Domain.Entity
         public double? OpenTarrace { get; set; }
 
         public int SiteId { get; set; }
-
-        public int UserId { get; set; }
-
-        public string? EntryDate { get; set; }
-
-        public string? UpdateDate { get; set; }
-
-        public byte[] IsActive { get; set; } = null!;
 
         public virtual ICollection<CustomerMaster>? CustomerMasters { get; set; } = new List<CustomerMaster>();
 

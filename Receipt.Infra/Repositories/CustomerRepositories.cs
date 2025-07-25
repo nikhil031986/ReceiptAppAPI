@@ -2,6 +2,7 @@
 using Receipt.Domain.Entity;
 using Receipt.Domain.Interfaces;
 using Receipt.Infra.Data;
+using System.Linq.Expressions;
 
 namespace Receipt.Infra.Repositories
 {
@@ -17,6 +18,28 @@ namespace Receipt.Infra.Repositories
                 await dbContext.customerDetails.AddAsync(cd);
             }
             return customer;
+        }
+
+        public async Task<IEnumerable<CustomerMaster>> GetDataFromDB(Expression<Func<CustomerMaster,bool>> expression=null)
+        {
+            if(expression == null)
+            {
+                return await dbContext.customerMasters.
+                    Include(x=> x.CustomerDetails).
+                    Include(x=> x.WingMaster).
+                    Include(x=> x.WingDetail).
+                    Include(x=>x.Site).
+                    ToListAsync();
+            }
+            else
+            {
+                return await dbContext.customerMasters.Include(x => x.CustomerDetails).
+                    Include(x => x.WingMaster).
+                    Include(x => x.WingDetail).
+                    Include(x => x.Site).
+                    Where(expression).
+                    ToListAsync();
+            }
         }
 
         public async Task<CustomerMaster> UpdateCustomerAsync(CustomerMaster customer)
@@ -63,12 +86,12 @@ namespace Receipt.Infra.Repositories
                 Include(i => i.WingDetail).ToListAsync();
         }
 
-        public async Task<bool> DeActivateCustomer(int curentId)
+        public async Task<bool> DeActivate(int curentId)
         {
             var customer = await dbContext.customerMasters.SingleOrDefaultAsync(x=> x.CustomerMasterId==curentId);
             if (customer != null)
             {
-                customer.IsActive = "0";
+                customer.IsActive = true;
                 dbContext.customerMasters.Update(customer);
                 await dbContext.SaveChangesAsync();
                 return true;

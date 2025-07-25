@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Receipt.Domain.Interfaces
 {
-    public interface IReceiptRepositories
+    public interface IReceiptRepositories:ICommonFunction<ReceiptDetail>
     {
         Task<IEnumerable<ReceiptDetail>> GetReceipts();
-        Task<ReceiptDetail> GetReceipt(int receiptId);
         Task<ReceiptDetail> AddReceipt(ReceiptDetail receiptDetail);
         Task<ReceiptDetail> UpdateReceipt(int receiptId, ReceiptDetail receiptDetail);
-        Task<bool> DeActiveReceipt(int receiptId);
         Task<IEnumerable<ReceiptDetail>> GetReceiptDetailsByCustomerId(int customerId);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Receipt.Domain.Entity
 {
-    public partial class WingMaster
+    public partial class WingMaster:BaseEntity
     {
         [Key]
         public int WingMasterId { get; set; }
@@ -23,14 +23,6 @@ namespace Receipt.Domain.Entity
         public int? EndNumber { get; set; }
 
         public int SiteId { get; set; }
-
-        public int UserId { get; set; }
-
-        public string? EntryDate { get; set; }
-
-        public int? UpdateDate { get; set; }
-
-        public byte[] IsActive { get; set; } = null!;
 
         public virtual ICollection<CustomerMaster>? CustomerMasters { get; set; } = new List<CustomerMaster>();
 

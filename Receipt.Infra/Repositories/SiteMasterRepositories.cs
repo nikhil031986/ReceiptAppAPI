@@ -24,7 +24,7 @@ namespace Receipt.Infra.Repositories
 
         public async Task<SiteMaster> AddSite(SiteMaster site)
         {
-            site.UserId = 1;
+            site.CreateuserId = 1;
             appDbContext.siteMasters.Add(site);
             await appDbContext.SaveChangesAsync();
             return site;
@@ -32,13 +32,13 @@ namespace Receipt.Infra.Repositories
 
         public async Task<SiteMaster> Updatesite(int siteId, SiteMaster site)
         {
-            site.UserId = 1;
+            site.UpdateuserId = 1;
             var Updatesite = await appDbContext.siteMasters.SingleOrDefaultAsync(x => x.SiteId ==siteId);
             if (Updatesite is not null)
             {
                 Updatesite.SiteName = site.SiteName;
                 Updatesite.Address = site.Address;
-                Updatesite.UserId = site.UserId;
+                Updatesite.CreateuserId = site.CreateuserId;
                 Updatesite.Display_Name = site.Display_Name;
                 Updatesite.RegistrationDetails = site.RegistrationDetails;
                 await appDbContext.SaveChangesAsync();

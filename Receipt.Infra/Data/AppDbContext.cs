@@ -13,6 +13,10 @@ namespace Receipt.Infra.Data
         public DbSet<CustomerDetail> customerDetails { get; set; }
         public DbSet<CustomerMaster> customerMasters { get; set; }
         public DbSet<ReceiptDetail> receiptDetails { get; set; }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Receipt.Domain.Entity
 {
-    public partial class CustomerDetail
+    public partial class CustomerDetail: BaseEntity
     {
         [Key]
         public int CustomerDetailsId { get; set; }
@@ -32,11 +32,9 @@ namespace Receipt.Domain.Entity
 
         public string? EmaiId { get; set; }
 
-        public byte[]? IsMain { get; set; }
+        public bool? IsMain { get; set; }
 
         public int SiteId { get; set; }
-
-        public byte[] IsActive { get; set; } = null!;
 
         public virtual CustomerMaster? Customer { get; set; } = null!;
 

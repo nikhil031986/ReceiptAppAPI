@@ -71,7 +71,9 @@ namespace Receipt.Infra.Repositories
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.EmailId),
                 new Claim("uid", user.UserId.ToString()),
-                new Claim("ip", ipAddress)
+                new Claim("ip", ipAddress),
+                new Claim("Role",(user.IsAdmin==true?"Admin":"Client"))
+
             }
             .Union(roleClaims);
 
