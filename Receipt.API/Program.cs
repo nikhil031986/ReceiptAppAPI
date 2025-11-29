@@ -1,11 +1,25 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Receipt.API;
+using System.Net;
 using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration["ApiKey"] = "C10D6AB6-8CBF-45F9-A5C2-4769CE171DF9";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOriginPolicy",
+        policy => policy
+            .WithOrigins("http://localhost:4200/") 
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+    );
+});
 
 // Add services to the container.
 builder.Services.AddControllers()
@@ -66,8 +80,18 @@ builder.Services.AddSwaggerGen(c => {
         }
     });
 });
+
+
 var app = builder.Build();
 
+app.UseRouting();
+
+app.UseCors("AllowAngularApp");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -85,6 +109,34 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.Use(async (context, next) =>
+{
+    var configApiKey = builder.Configuration["ApiKey"];
+    if (string.IsNullOrWhiteSpace(configApiKey))
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        await context.Response.WriteAsync("API key not configured.");
+        return;
+    }
+
+    // Check for API key in header
+    if (!context.Request.Headers.TryGetValue("X-API-KEY", out var extractedApiKey))
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+        await context.Response.WriteAsync("API Key missing.");
+        return;
+    }
+
+    if (!string.Equals(extractedApiKey, configApiKey))
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+        await context.Response.WriteAsync("Invalid API Key.");
+        return;
+    }
+
+    await next();
+});
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -92,5 +144,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+
 
 app.Run();

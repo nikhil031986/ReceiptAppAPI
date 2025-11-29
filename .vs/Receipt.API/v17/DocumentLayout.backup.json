@@ -11,24 +11,16 @@
       "RelativeMoniker": "D:0:0:{CC68F294-59BE-49EA-BD24-935B61D757D0}|Receipt.API\\Receipt.API.csproj|solutionrelative:receipt.api\\controllers\\usermastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF55365E-9959-4F37-BF51-50B530AAFC6F}|Receipt.Application\\Receipt.Application.csproj|d:\\nayan_project\\receiptappapi\\receipt.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF55365E-9959-4F37-BF51-50B530AAFC6F}|Receipt.Application\\Receipt.Application.csproj|solutionrelative:receipt.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CF55365E-9959-4F37-BF51-50B530AAFC6F}|Receipt.Application\\Receipt.Application.csproj|d:\\nayan_project\\receiptappapi\\receipt.application\\queries\\getcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF55365E-9959-4F37-BF51-50B530AAFC6F}|Receipt.Application\\Receipt.Application.csproj|solutionrelative:receipt.application\\queries\\getcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26487AB5-3567-4AF6-9CED-741F60AA07B1}|Receipt.Domain\\Receipt.Domain.csproj|d:\\nayan_project\\receiptappapi\\receipt.domain\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{26487AB5-3567-4AF6-9CED-741F60AA07B1}|Receipt.Domain\\Receipt.Domain.csproj|solutionrelative:receipt.domain\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC68F294-59BE-49EA-BD24-935B61D757D0}|Receipt.API\\Receipt.API.csproj|d:\\nayan_project\\receiptappapi\\receipt.api\\helpers\\authorizeattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC68F294-59BE-49EA-BD24-935B61D757D0}|Receipt.API\\Receipt.API.csproj|solutionrelative:receipt.api\\helpers\\authorizeattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC68F294-59BE-49EA-BD24-935B61D757D0}|Receipt.API\\Receipt.API.csproj|d:\\nayan_project\\receiptappapi\\receipt.api\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC68F294-59BE-49EA-BD24-935B61D757D0}|Receipt.API\\Receipt.API.csproj|solutionrelative:receipt.api\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF55365E-9959-4F37-BF51-50B530AAFC6F}|Receipt.Application\\Receipt.Application.csproj|d:\\nayan_project\\receiptappapi\\receipt.application\\queries\\getalluserqueries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF55365E-9959-4F37-BF51-50B530AAFC6F}|Receipt.Application\\Receipt.Application.csproj|solutionrelative:receipt.application\\queries\\getalluserqueries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0E5D626A-CDFD-461E-ACB6-73B950C9B566}|Receipt.Infra\\Receipt.Infra.csproj|d:\\nayan_project\\receiptappapi\\receipt.infra\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0E5D626A-CDFD-461E-ACB6-73B950C9B566}|Receipt.Infra\\Receipt.Infra.csproj|solutionrelative:receipt.infra\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CF55365E-9959-4F37-BF51-50B530AAFC6F}|Receipt.Application\\Receipt.Application.csproj|d:\\nayan_project\\receiptappapi\\receipt.application\\queries\\getreciptdetailqueries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF55365E-9959-4F37-BF51-50B530AAFC6F}|Receipt.Application\\Receipt.Application.csproj|solutionrelative:receipt.application\\queries\\getreciptdetailqueries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,81 +42,54 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetCustomer.cs",
+              "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\Queries\\GetCustomer.cs",
+              "RelativeDocumentMoniker": "Receipt.Application\\Queries\\GetCustomer.cs",
+              "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\Queries\\GetCustomer.cs",
+              "RelativeToolTip": "Receipt.Application\\Queries\\GetCustomer.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAEwBwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T06:59:41.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthorizeAttribute.cs",
+              "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.API\\Helpers\\AuthorizeAttribute.cs",
+              "RelativeDocumentMoniker": "Receipt.API\\Helpers\\AuthorizeAttribute.cs",
+              "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.API\\Helpers\\AuthorizeAttribute.cs",
+              "RelativeToolTip": "Receipt.API\\Helpers\\AuthorizeAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAEwA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T06:59:41.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "UserMasterController.cs",
               "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.API\\Controllers\\UserMasterController.cs",
               "RelativeDocumentMoniker": "Receipt.API\\Controllers\\UserMasterController.cs",
               "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.API\\Controllers\\UserMasterController.cs",
               "RelativeToolTip": "Receipt.API\\Controllers\\UserMasterController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAEwCgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T07:03:48.541Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Domain\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "Receipt.Domain\\DependencyInjection.cs",
-              "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Domain\\DependencyInjection.cs",
-              "RelativeToolTip": "Receipt.Domain\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T05:06:44.21Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "Receipt.Application\\DependencyInjection.cs",
-              "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\DependencyInjection.cs",
-              "RelativeToolTip": "Receipt.Application\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T05:06:17.872Z",
+              "WhenOpened": "2025-07-20T07:02:55.92Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.API\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "Receipt.API\\DependencyInjection.cs",
-              "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.API\\DependencyInjection.cs",
-              "RelativeToolTip": "Receipt.API\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Title": "GetReciptDetailQueries.cs",
+              "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\Queries\\GetReciptDetailQueries.cs",
+              "RelativeDocumentMoniker": "Receipt.Application\\Queries\\GetReciptDetailQueries.cs",
+              "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\Queries\\GetReciptDetailQueries.cs",
+              "RelativeToolTip": "Receipt.Application\\Queries\\GetReciptDetailQueries.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAD4vx0AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T05:05:21.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GetAllUserQueries.cs",
-              "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\Queries\\GetAllUserQueries.cs",
-              "RelativeDocumentMoniker": "Receipt.Application\\Queries\\GetAllUserQueries.cs",
-              "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Application\\Queries\\GetAllUserQueries.cs",
-              "RelativeToolTip": "Receipt.Application\\Queries\\GetAllUserQueries.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T04:55:48.23Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Infra\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Receipt.Infra\\Data\\AppDbContext.cs",
-              "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.Infra\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Receipt.Infra\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T04:44:09.793Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-21T06:06:09.691Z"
             },
             {
               "$type": "Document",
@@ -134,9 +99,9 @@
               "RelativeDocumentMoniker": "Receipt.API\\Program.cs",
               "ToolTip": "D:\\Nayan_Project\\ReceiptAppAPI\\Receipt.API\\Program.cs",
               "RelativeToolTip": "Receipt.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAkwHQAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T14:40:05.502Z",
+              "WhenOpened": "2025-06-20T08:59:57.463Z",
               "EditorCaption": ""
             }
           ]
