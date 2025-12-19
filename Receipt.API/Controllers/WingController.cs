@@ -13,6 +13,7 @@ namespace Receipt.API.Controllers
     public class WingController(ISender sender) : ControllerBase
     {
         [HttpPost("")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Addwing([FromBody] WingMaster wingMaster)
         {
             var result = await sender.Send(new AddwingCommand(wingMaster));
@@ -24,6 +25,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpPost("Updatewing")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Updatewing([FromBody] WingMaster wingMaster)
         {
             var result = await sender.Send(new UpdatewingCommand(wingMaster));
@@ -35,6 +37,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpPost("DeActivate/{wingMasterId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeActivate([FromRoute] int wingMasterId)
         {
             var result = await sender.Send(new DeActivewingCommand(wingMasterId));
@@ -46,6 +49,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpPost("Deletewing/{wingMasterId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Deletewing([FromRoute] int wingMasterId)
         {
             var result = await sender.Send(new DeletewingCommand(wingMasterId));
@@ -57,6 +61,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpGet("GetAllwing")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetAllwing()
         {
             var result = await sender.Send(new GetAllwingQueries());
@@ -68,6 +73,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpGet("GetwingById/{wingId}")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetwingById([FromRoute] int wingId)
         {
             var result = await sender.Send(new GetwingByIdQueries(wingId));
@@ -79,6 +85,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpGet("GetWingDetails/{wingMasterId}")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetWingDetails([FromRoute] int wingMasterId)
         {
             var result = await sender.Send(new GetWingDetailsQueries(wingMasterId));
@@ -90,6 +97,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpGet("GetWingDetailsById/{wigDetailId}")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetWingDetailsById([FromRoute] int wigDetailId)
         {
             var result = await sender.Send(new GetWingDetailsByIdQueries(wigDetailId));

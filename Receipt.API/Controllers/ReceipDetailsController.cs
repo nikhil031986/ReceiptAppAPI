@@ -13,6 +13,7 @@ namespace Receipt.API.Controllers
     public class ReceipDetailsController(ISender sender) : Controller
     {
         [HttpPost("")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddReceiptDetails([FromBody] ReceiptDetail receiptDetail)
         {
             var result = await sender.Send(new AddReciptDetailsCommand(receiptDetail));
@@ -23,6 +24,7 @@ namespace Receipt.API.Controllers
             return Ok(result);
         }
         [HttpPost("UpdateReceiptDetails")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateReceiptDetails([FromBody] ReceiptDetail receiptDetail)
         {
             var result = await sender.Send(new UpdateReciptDetailsCommand(receiptDetail.ReceiptId, receiptDetail));
@@ -33,6 +35,7 @@ namespace Receipt.API.Controllers
             return Ok(result);
         }
         [HttpPost("DeActivate/{receiptId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeActivate([FromRoute] int receiptId)
         {
             var result = await sender.Send(new DeActiveReciptDetailsCommand(receiptId));
@@ -43,6 +46,7 @@ namespace Receipt.API.Controllers
             return Ok(result);
         }
         [HttpGet("GetReceiptDetailsById/{receiptId}")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetReceiptDetailsById([FromRoute] int receiptId)
         {
             var result = await sender.Send(new GetReceiptDetailQueries(receiptId));
@@ -53,6 +57,7 @@ namespace Receipt.API.Controllers
             return Ok(result);
         }
         [HttpGet("GetAllReceiptDetails")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetAllReceiptDetails()
         {
             var result = await sender.Send(new GetAllReceiptDetailsQueries());
@@ -63,6 +68,7 @@ namespace Receipt.API.Controllers
             return Ok(result);
         }
         [HttpGet("GetReceiptDetailsByCustomerId/{customerId}")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetReceiptDetailsByCustomerId([FromRoute] int customerId)
         {
             var result = await sender.Send(new GetReceiptDetailsByCustomerIdQueries(customerId));

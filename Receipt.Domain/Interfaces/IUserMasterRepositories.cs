@@ -10,7 +10,10 @@ namespace Receipt.Domain.Interfaces
         Task<UserMaster> AddUser(UserMaster userMaster);
         Task<UserMaster> UpdateUser(int userId, UserMaster userMaster);
         Task<bool> DeActiveUser(int userId); 
-        
-        
+        Task<UserSite> AddUserSite(UserSite userSite);
+        Task<UserSite> UpdateUserSite(UserSite userSite);
+        Task<UserSite> DeleteUserSite(int userSiteId);
+        Task<List<UserSite>> GetUserSite(int userId);
+
     }
 }

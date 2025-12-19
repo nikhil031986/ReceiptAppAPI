@@ -15,6 +15,7 @@ namespace Receipt.API.Controllers
     public class CustomerController(ISender sender) : Controller
     {
         [HttpPost("")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddCustomer([FromBody] CustomerMaster customer)
         {
             var result = await sender.Send(new AddCustomerCommand(customer));
@@ -26,6 +27,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpGet("GetCustomer")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetCustomer()
         {
             var result = await sender.Send(new GetCustomersCommand());
@@ -37,6 +39,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpGet("GetCustomerById/{CustomerId}")]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetCustomerById([FromRoute] int CustomerId)
         {
             var result = await sender.Send(new GetCustomerByIdCommand(CustomerId));
@@ -48,6 +51,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpPost("UpdateCustomer")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateSite([FromBody] CustomerMaster customer)
         {
             var result = await sender.Send(new UpdateCustomerCommand(customer));
@@ -59,6 +63,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpPost("DeActivate/{customerId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeActivate([FromRoute] int customerId)
         {
             var result = await sender.Send(new DeActiveCustomerCommand(customerId));
@@ -70,6 +75,7 @@ namespace Receipt.API.Controllers
         }
 
         [HttpPost("DeleteCustomer/{customerId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCustomer([FromRoute] int customerId)
         {
             var result= await sender.Send(new DeleteCustomerCommand(customerId));

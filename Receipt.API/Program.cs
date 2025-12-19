@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Receipt.API;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
 
 
@@ -34,7 +35,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddJwtBearer(options =>
+ .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -48,6 +49,17 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    //options.AddPolicy("AtLeastTwoRoles", policy => policy.RequireClaim(ClaimTypes.Role, "Admin", ClaimTypes.Role, "Client"));
+    options.AddPolicy("Admin", policy =>
+       policy.RequireRole("Admin"));
+
+    options.AddPolicy("Client", policy =>
+    policy.RequireClaim("Client", "Client"));
+});
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddAppDI();
@@ -82,21 +94,29 @@ builder.Services.AddSwaggerGen(c => {
 });
 
 
+
 var app = builder.Build();
 
 app.UseRouting();
 
 app.UseCors("AllowAngularApp");
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 if (app.Environment.IsDevelopment())
 {
@@ -139,9 +159,7 @@ app.Use(async (context, next) =>
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
 
-app.UseAuthorization();
 
 app.MapControllers();
 

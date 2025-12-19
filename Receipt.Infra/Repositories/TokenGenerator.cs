@@ -39,7 +39,7 @@ namespace Receipt.Infra.Repositories
             authenticationResponse.JWToken =new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             authenticationResponse.Email = user.EmailId;
             authenticationResponse.UserName = user.UserName;
-            authenticationResponse.Roles = new List<string> { "Admin", "Client" };
+            authenticationResponse.Roles = new List<string> { "Admin" };
             authenticationResponse.IsVerified = true;
             authenticationResponse.RefreshToken = "Token";
             return new BaseResponse<AuthenticationResponse>(authenticationResponse, $"Authenticated {user.UserName}");
@@ -61,7 +61,6 @@ namespace Receipt.Infra.Repositories
 
             var roleClaims = new List<Claim>();
 
-            roleClaims.Add(new Claim("roles", (user.IsAdmin is not null && user.IsAdmin==true ? "Admin" : "Client")));
 
             string ipAddress = "";
 
@@ -72,7 +71,7 @@ namespace Receipt.Infra.Repositories
                 new Claim(JwtRegisteredClaimNames.Email, user.EmailId),
                 new Claim("uid", user.UserId.ToString()),
                 new Claim("ip", ipAddress),
-                new Claim("Role",(user.IsAdmin==true?"Admin":"Client"))
+                new Claim(ClaimTypes.Role,(user.IsAdmin==true?"Admin":"Client"))
 
             }
             .Union(roleClaims);

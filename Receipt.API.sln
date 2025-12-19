@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receipt.API", "Receipt.API\Receipt.API.csproj", "{CC68F294-59BE-49EA-BD24-935B61D757D0}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receipt.Domain", "Receipt.Domain\Receipt.Domain.csproj", "{26487AB5-3567-4AF6-9CED-741F60AA07B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receipt.Infra", "Receipt.Infra\Receipt.Infra.csproj", "{0E5D626A-CDFD-461E-ACB6-73B950C9B566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptUnitTest", "ReceiptUnitTest\ReceiptUnitTest.csproj", "{374FD0CE-26E0-4BC7-AEC9-42C64B86A9B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0E5D626A-CDFD-461E-ACB6-73B950C9B566}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E5D626A-CDFD-461E-ACB6-73B950C9B566}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E5D626A-CDFD-461E-ACB6-73B950C9B566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{374FD0CE-26E0-4BC7-AEC9-42C64B86A9B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{374FD0CE-26E0-4BC7-AEC9-42C64B86A9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{374FD0CE-26E0-4BC7-AEC9-42C64B86A9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{374FD0CE-26E0-4BC7-AEC9-42C64B86A9B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
