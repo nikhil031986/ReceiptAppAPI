@@ -24,8 +24,20 @@ namespace Receipt.Application.Queries
         {
             return await wingRepositories.GetwingByIdAsync(request.wingId);
         }
-    }   
-    
+    }
+
+    public record GetwingBySiteIdQueries(int siteId) : IRequest<IEnumerable<WingMaster>>;
+
+    internal class GetwingBySiteIdQueriesHandler(IWingRepositories wingRepositories)
+        : IRequestHandler<GetwingBySiteIdQueries, IEnumerable<WingMaster>>
+    {
+        public async Task<IEnumerable<WingMaster>> Handle(GetwingBySiteIdQueries request, CancellationToken cancellationToken)
+        {
+            return await wingRepositories.GetDataFromDB(x=> x.SiteId == request.siteId);
+        }
+    }
+
+
     public record GetWingDetailsQueries(int wingMasterId) : IRequest<IEnumerable<WingDetail>>;
     
     internal class GetWingDetailsQueriesHandler(IWingRepositories wingRepositories)

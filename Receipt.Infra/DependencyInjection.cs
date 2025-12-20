@@ -16,6 +16,7 @@ namespace Receipt.Infra
             });
 
             services.AddScoped<IUserMasterRepositories, UserMasterRepositories>();
+            services.AddScoped<IUserSite, UserSiteRepositories>();
             services.AddScoped<ISiteMasterRepositories, SiteMasterRepositories>();
             services.AddScoped<IWingRepositories, wingRepositories>();
             services.AddScoped<ICustomerRepositories, CustomerRepositories>();

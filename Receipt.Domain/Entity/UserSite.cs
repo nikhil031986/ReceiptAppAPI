@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Receipt.Domain.Entity
 {
-    public partial class UserSite :BaseEntity
+    public class UserSite :BaseEntity
     {
         [Key]
         public int UserSiteId { get; set; }
         public int UserId { get; set; }
         public int SiteId { get; set; }
+        public bool IsDefault { get; set; }
         public virtual UserMaster? User { get; set; } = null!;
         public virtual SiteMaster? Site { get; set; } = null!;
     }

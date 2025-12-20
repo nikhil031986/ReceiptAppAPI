@@ -31,4 +31,17 @@ namespace Receipt.Application.Queries
             return dbData.FirstOrDefault();
         }
     }
+
+    public record GetCustomerBySiteIdCommand(int SiteId) : IRequest<CustomerMaster>;
+
+    internal class GetCustomerBySiteIdCommandHandler(ICustomerRepositories customerRepositories)
+        : IRequestHandler<GetCustomerBySiteIdCommand, CustomerMaster>
+    {
+        public async Task<CustomerMaster> Handle(GetCustomerBySiteIdCommand request, CancellationToken cancellationToken)
+        {
+            var dbData = await customerRepositories.GetDataFromDB(x => x.SiteId == request.SiteId && x.Site.IsActive == true);
+            return dbData.FirstOrDefault();
+        }
+    }
+
 }

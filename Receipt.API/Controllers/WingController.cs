@@ -72,6 +72,18 @@ namespace Receipt.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetwingBySiteId/{siteId}")]
+        [Authorize(Roles = "Client,Admin")]
+        public async Task<IActionResult> GetwingBySiteId([FromRoute] int siteId)
+        {
+            var result = await sender.Send(new GetwingBySiteIdQueries(siteId));
+            if (result == null || !result.Any())
+            {
+                return NotFound("No wings found.");
+            }
+            return Ok(result);
+        }
+
         [HttpGet("GetwingById/{wingId}")]
         [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetwingById([FromRoute] int wingId)

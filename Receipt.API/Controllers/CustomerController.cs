@@ -11,7 +11,6 @@ namespace Receipt.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    [AuthorizeAttributes]
     public class CustomerController(ISender sender) : Controller
     {
         [HttpPost("")]
@@ -43,6 +42,18 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> GetCustomerById([FromRoute] int CustomerId)
         {
             var result = await sender.Send(new GetCustomerByIdCommand(CustomerId));
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("GetCustomerBySitId/{siteId}")]
+        [Authorize(Roles = "Client,Admin")]
+        public async Task<IActionResult> GetCustomerBySitId([FromRoute] int siteId)
+        {
+            var result = await sender.Send(new GetCustomerBySiteIdCommand(siteId));
             if (result == null)
             {
                 return NotFound();

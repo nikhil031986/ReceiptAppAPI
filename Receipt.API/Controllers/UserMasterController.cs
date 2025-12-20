@@ -14,7 +14,7 @@ namespace Receipt.API.Controllers
     {
         [Authorize]
         [HttpPost("")]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddUser([FromBody] UserMaster userMaster)
         {
             var result = await sender.Send(new AddUserMasterCommand(userMaster));

@@ -17,5 +17,6 @@ namespace Receipt.Domain.Interfaces
         Task<bool> DeActivatewing(int wingMasterId);
         Task<IEnumerable<WingDetail>> GetWingDetails(int wingMasterId);
         Task<WingDetail> GetWingDetailsByIdAsync(int wigDetailId);
+        Task<IEnumerable<WingMaster>> GetDataFromDB(System.Linq.Expressions.Expression<Func<WingMaster, bool>> expression = null);
     }
 }

@@ -13,6 +13,5 @@ namespace Receipt.Domain.Interfaces
         Task<CustomerMaster> AddCustomerAsync(CustomerMaster customer);
         Task<CustomerMaster> UpdateCustomerAsync(CustomerMaster customer);
         Task<bool> DeleteCustomerAsync(int customerId);
-        Task<CustomerMaster> GetCustomerByIdAsync(int customerId);
     }
 }

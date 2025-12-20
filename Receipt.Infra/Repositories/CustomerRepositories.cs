@@ -68,24 +68,6 @@ namespace Receipt.Infra.Repositories
             }
             return false;
         }
-
-        public async Task<CustomerMaster> GetCustomerByIdAsync(int customerId)
-        {
-            return await dbContext.customerMasters.
-                Include(c => c.CustomerDetails).
-                Include(w => w.WingMaster).
-                Include(i => i.WingDetail).
-                SingleOrDefaultAsync(x => x.CustomerMasterId == customerId);
-        }
-
-        public async Task<IEnumerable<CustomerMaster>> GetAllCustomersAsync()
-        {
-            return await dbContext.customerMasters.
-                Include(c => c.CustomerDetails).
-                Include(w => w.WingMaster).
-                Include(i => i.WingDetail).ToListAsync();
-        }
-
         public async Task<bool> DeActivate(int curentId)
         {
             var customer = await dbContext.customerMasters.SingleOrDefaultAsync(x=> x.CustomerMasterId==curentId);

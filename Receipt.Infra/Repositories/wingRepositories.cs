@@ -5,12 +5,13 @@ using Receipt.Infra.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Receipt.Infra.Repositories
 {
-    public class wingRepositories(AppDbContext dbContext) :IWingRepositories
+    public class wingRepositories(AppDbContext dbContext) : IWingRepositories
     {
         public async Task<WingMaster> AddwingAsync(WingMaster wingMaster)
         {
@@ -28,12 +29,32 @@ namespace Receipt.Infra.Repositories
             }
             return null;
         }
+
+        public async Task<IEnumerable<WingMaster>> GetDataFromDB(Expression<Func<WingMaster, bool>> expression = null)
+        {
+            if (expression == null)
+            {
+                return await dbContext.DbwingMasters
+                    .Include(x => x.WingDetails)
+                    .Include(x => x.Site)
+                    .ToListAsync();
+            }
+            else
+            {
+                return await dbContext.DbwingMasters
+                    .Include(x => x.WingDetails)
+                    .Include(x => x.Site)
+                    .Where(expression)
+                    .ToListAsync();
+            }
+        }
+
         public async Task<WingMaster> UpdatewingAsync(WingMaster wingMaster)
         {
             if (wingMaster != null)
             {
                 var wing = await dbContext.DbwingMasters.
-                    Where(x=> x.WingMasterId == wingMaster.WingMasterId).FirstOrDefaultAsync();
+                    Where(x => x.WingMasterId == wingMaster.WingMasterId).FirstOrDefaultAsync();
                 if (wing != null)
                 {
                     wing.DisplayName = wingMaster.DisplayName;
@@ -63,7 +84,7 @@ namespace Receipt.Infra.Repositories
         public async Task<bool> DeletewingAsync(int wingMasterId)
         {
             var wing = await dbContext.DbwingMasters.FindAsync(wingMasterId);
-            if(wing != null)
+            if (wing != null)
             {
                 var wingDetails = await dbContext.wingDetails.Where(x => x.WingMasterId == wingMasterId).ToListAsync();
                 if (wingDetails != null && wingDetails.Count > 0)
@@ -73,30 +94,29 @@ namespace Receipt.Infra.Repositories
                 dbContext.DbwingMasters.Remove(wing);
                 await dbContext.SaveChangesAsync();
                 return true;
-            }   
+            }
             return false;
         }
         public async Task<WingMaster> GetwingByIdAsync(int wingMasterId)
         {
             var wing = await dbContext.DbwingMasters
+                .Include(p => p.WingDetails)
+                .Include(p => p.Site)
                 .SingleOrDefaultAsync(x => x.WingMasterId == wingMasterId);
-            if (wing != null)
-            {
-                wing.WingDetails = await dbContext.wingDetails.Where(x => x.WingMasterId == wing.WingMasterId).ToListAsync();
-                return wing;
-            }
             return null;
         }
         public async Task<IEnumerable<WingMaster>> GetAllwingAsync()
         {
             return await dbContext.DbwingMasters
-                .Include(p=> p.WingDetails)
+                .Include(p => p.WingDetails)
+                .Include(p => p.Site)
                 .ToListAsync();
         }
+
         public async Task<bool> DeActivatewing(int wingMasterId)
         {
             var wing = await dbContext.DbwingMasters.FindAsync(wingMasterId);
-            if(wing != null)
+            if (wing != null)
             {
                 wing.IsActive = true; // Assuming IsActive is a property in WingMaster
                 dbContext.DbwingMasters.Update(wing);
@@ -105,13 +125,15 @@ namespace Receipt.Infra.Repositories
             }
             return false;
         }
+
         public async Task<IEnumerable<WingDetail>> GetWingDetails(int wingMasterId)
         {
-           return await dbContext.wingDetails
-                .Include(wm=> wm.WingMaster)
-                .Where(x => x.WingMasterId == wingMasterId)
-                .ToListAsync();
+            return await dbContext.wingDetails
+                 .Include(wm => wm.WingMaster)
+                 .Where(x => x.WingMasterId == wingMasterId)
+                 .ToListAsync();
         }
+
         public async Task<WingDetail> GetWingDetailsByIdAsync(int wigDetailId)
         {
             return await dbContext.wingDetails
