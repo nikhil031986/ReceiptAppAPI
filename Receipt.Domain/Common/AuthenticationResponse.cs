@@ -15,7 +15,5 @@ namespace Receipt.Domain.Common
         public List<string> Roles { get; set; }
         public bool IsVerified { get; set; }
         public string JWToken { get; set; }
-        [JsonIgnore]
-        public string RefreshToken { get; set; }
     }
 }

@@ -1,0 +1,16 @@
+<div class="row page-titles">
+    <div class="col-lg-8 col-8 align-self-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item active">{{currentRoute}}</li>
+        </ol>
+    </div>    
+    <div class="col-lg-2 col-2 content-align-end" *ngIf="IsUserLogin">
+        <select [(ngModel)]="selectSiteId" class="form-control" title="Select site" aria-label="Select site">
+            <option value="" disabled selected>Select an option</option>
+            <option *ngFor="let item of sites" [value]="item.siteId">
+                {{ item.display_Name }}
+            </option>
+        </select>
+    </div>     
+</div>

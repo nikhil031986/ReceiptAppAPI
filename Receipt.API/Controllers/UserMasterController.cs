@@ -38,7 +38,7 @@ namespace Receipt.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("Login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login(string emailId, string password)
         {
             var result = await sender.Send(new TokenGeneratorQuerie(emailId, password));

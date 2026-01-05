@@ -41,7 +41,6 @@ namespace Receipt.Infra.Repositories
             authenticationResponse.UserName = user.UserName;
             authenticationResponse.Roles = new List<string> { "Admin" };
             authenticationResponse.IsVerified = true;
-            authenticationResponse.RefreshToken = "Token";
             return new BaseResponse<AuthenticationResponse>(authenticationResponse, $"Authenticated {user.UserName}");
         }
 
