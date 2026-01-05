@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../service/login.service';
 import { LocalStorageService } from '../service/local-storage.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-loginpage',
@@ -46,7 +47,9 @@ export class LoginpageComponent implements OnInit {
             //;
           }
       },
-        (error) => console.log('HTTP Error', error),
+        (error) => {
+          this.errorMessage = 'Login failed. Please check your credentials and try again.';
+        },
       );
   }
 }

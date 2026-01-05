@@ -60,6 +60,7 @@ export class RoutpageComponent implements OnInit {
           this.sites.push(dat.site);
           if(dat.isDefault){
             this.selectSiteId = dat.siteId;
+            this.localStorageService.setCurrentSiteId(this.selectSiteId);
           }
         });       
       },
@@ -69,4 +70,8 @@ export class RoutpageComponent implements OnInit {
     );
   }
 
+  SiteChange(event: any): void {
+    const selectedSiteId = Number(this.selectSiteId);
+    this.localStorageService.setCurrentSiteId(selectedSiteId);
+  }
 }

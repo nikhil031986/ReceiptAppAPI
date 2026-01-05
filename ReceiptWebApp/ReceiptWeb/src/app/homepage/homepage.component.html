@@ -1,1 +1,14 @@
-<p>Welcome homepage works!</p>
+<div class="row">
+    <h3>Wings Information</h3>
+</div>
+<div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let card of wings">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{ card.displayName }}</h3>
+                <p class="card-text">Flore Count :{{ card.floarCount }}</p>   
+                <p class="card-text">Per flore house Count :{{ card.houseCount }}</p>
+                <p class="card-text">Flat Start Number :{{ card.startNumber }}</p>    
+            </div>
+        </div>
+</div>
