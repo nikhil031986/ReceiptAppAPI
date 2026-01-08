@@ -5,11 +5,13 @@ import { SitesService } from '../service/sites.service';
 import { NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LocalStorageService } from '../service/local-storage.service';
+import { AuthService } from '../auth.service';
+import { CapitalizePipePipe } from '../capitalize-pipe.pipe';
 
 @Component({
   selector: 'app-routpage',
   standalone: true,
-  imports: [NgForOf, FormsModule, NgIf],
+  imports: [NgForOf, FormsModule, NgIf,CapitalizePipePipe],
   templateUrl: './routpage.component.html',
   styleUrl: './routpage.component.css'
 })
@@ -22,7 +24,8 @@ export class RoutpageComponent implements OnInit {
   constructor(private router: Router, 
    private activatedRoute: ActivatedRoute,
    private sitesService: SitesService,
-   private localStorageService : LocalStorageService) { }
+   private localStorageService : LocalStorageService,
+   private authService: AuthService) { }
   
   ngOnInit(): void {
      this.localStorageService.isLoggedIn$.subscribe(status => {
@@ -45,7 +48,7 @@ export class RoutpageComponent implements OnInit {
         }
         
         // Option 1: Get route path from route config
-        this.currentRoute = route.routeConfig?.path || '';
+        this.currentRoute = route.routeConfig?.path?.split('/')[0] || '';
       });
   }
 
@@ -53,6 +56,7 @@ export class RoutpageComponent implements OnInit {
     if(!this.IsUserLogin){
       return;
     }
+    this.sites=[];
     this.sitesService.getSitesList().subscribe(
       (data) => {
         console.log('Sites list fetched:', data);
@@ -60,7 +64,8 @@ export class RoutpageComponent implements OnInit {
           this.sites.push(dat.site);
           if(dat.isDefault){
             this.selectSiteId = dat.siteId;
-            this.localStorageService.setCurrentSiteId(this.selectSiteId);
+            this.localStorageService.setCurrentSiteId(dat.siteId);
+            this.authService.setSiteId(dat.siteId);
           }
         });       
       },
@@ -72,6 +77,13 @@ export class RoutpageComponent implements OnInit {
 
   SiteChange(event: any): void {
     const selectedSiteId = Number(this.selectSiteId);
-    this.localStorageService.setCurrentSiteId(selectedSiteId);
+    if (isNaN(selectedSiteId)) {
+      console.error('Invalid site ID selected:', this.selectSiteId);
+      return;
+    }
+    if(selectedSiteId <= 0){
+      return;
+    }
+    this.authService.setSiteId(selectedSiteId);
   }
 }

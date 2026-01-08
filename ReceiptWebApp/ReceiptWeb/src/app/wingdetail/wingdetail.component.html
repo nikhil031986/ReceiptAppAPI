@@ -1,0 +1,296 @@
+<div class="row h-100">
+    <!-- <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card p-2">
+            <div class="card-block">
+                <h3>Wings Information</h3>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-lg-12 col-xlg-12 col-md-7">
+     <div class="card p-5">
+     <div class="card-block">
+        <div class="App">
+            <h3>Wings Information</h3>
+                <fieldset>
+                    <form class="form-horizontal form-material" (ngSubmit)="Save()">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-12" for="wingName">Wing Name:</label>
+                                <div class="col-md-12">
+                                <input class="form-control form-control-line" type="text" id="wingName" name="wingName" [(ngModel)]="formData.displayName" required />
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="floarCount">Floar Count:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="floarCount" name="floarCount" [(ngModel)]="formData.floarCount" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="houseCount">House Count:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="houseCount" name="houseCount" [(ngModel)]="formData.houseCount" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="startNumber">Start Number:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="startNumber" name="startNumber" [(ngModel)]="formData.startNumber" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="endNumber">End Number:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="endNumber" name="endNumber" [(ngModel)]="formData.endNumber" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            
+                        </div>
+                       <div class="row">
+
+                            <div class="form-group">
+                               
+                                <div class="row">
+                                    <div class="card">
+                                        <div class="card-body">
+                                             <div class="row">
+                                                <div class="col-md-6">
+                                                    <h3>Wing Deatils</h3>
+                                                </div>
+                                                <div class="col-md-6 d-flex justify-content-end">
+                                                    <button class="btn m-2 btn-primary" type="button" (click)="AddNewWingDetails('editwingDetails')">Add Wing Detail</button> 
+                                                </div>  
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead class="table-dark">
+                                                            <tr>
+                                                                <th *ngIf="showIdColumn">wingDetailsId</th>
+                                                                <th *ngIf="showIdColumn">wingMasterId</th>
+                                                                <th>Flat No</th>
+                                                                <th>wing Name</th>
+                                                                <th>Land</th>
+                                                                <th>Carpate</th>
+                                                                <th>WB</th>
+                                                                <th>Total</th>
+                                                                <th>Amount</th>
+                                                                <th>East</th>
+                                                                <th>West</th>
+                                                                <th>North</th>
+                                                                <th>South</th>
+                                                                <th>Floar Name</th>
+                                                                <th>Open Tarrace</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let detail of formData.wingDetails; let i = index">
+                                                                <td *ngIf="showIdColumn">
+                                                                    {{detail.wingDetailId}}
+                                                                </td>
+                                                                <td *ngIf="showIdColumn">
+                                                                    {{detail.wingMasterId}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.flatNo}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.wingName}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.land}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.carpate}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.wb}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.total}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.amount}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.east}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.west}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.north}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.south}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.flowrName}}
+                                                                </td>
+                                                                <td>
+                                                                    {{detail.openTarrace}}
+                                                                </td>
+                                                                <td>
+                                                                    <button title=" " class="btn m-2 btn-primary" type="button" (click)="openModal('editwingDetails', detail.wingDetailId)">
+                                                                        <i class="mdi mdi-account-edit"></i>
+                                                                    </button> 
+                                                                    <button title=" " class="btn btn-danger" type="button" (click)="DeleteWingDetails(detail.wingDetailId)">
+                                                                        <i class="mdi mdi-delete"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                       </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success">Save Wing Information</button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+        </div>
+     </div>
+ </div>
+</div>
+</div>
+
+
+<div id="editwingDetails" class="modal" tabindex="-1" aria-labelledby="editwingLabel" aria-hidden="true" style="display: none;" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row m-0 w-100">
+                    <div class="col-md-10 d-flex justify-content-start">
+                        <h5 class="modal-title">Wing Details</h5>
+                    </div>
+                    <div class="col-md-2 w-auto d-flex justify-content-end">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="closeWingDetailModal('editwingDetails')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-material" (ngSubmit)="SaveWingDetails('editwingDetails')">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-12" for="wingName">Wing Name:</label>
+                            <div class="col-md-12">
+                                <input class="form-control form-control-line" type="text" id="wingName" name="wingName" [(ngModel)]="wingdetailsForm.wingName" required readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                             <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title justify-content-center">Falt Detail</h3>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="flatNo">Flat No:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="text" id="flatNo" name="flatNo" [(ngModel)]="wingdetailsForm.flatNo" required  />
+                                        </div>
+                                    </div>  
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="land">Land:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="land" name="land" [(ngModel)]="wingdetailsForm.land" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="carpate">Carpate:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="carpate" name="carpate" [(ngModel)]="wingdetailsForm.carpate" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="wb">WB:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="wb" name="wb" [(ngModel)]="wingdetailsForm.wb" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="openTarrace">Open Tarrace:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="openTarrace" name="openTarrace" [(ngModel)]="wingdetailsForm.openTarrace" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="total">Total:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="total" name="total" [(ngModel)]="wingdetailsForm.total" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title justify-content-center">Other Detail</h3>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="floarName">Floor Name:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="text" id="floarName" name="floarName" [(ngModel)]="wingdetailsForm.flowrName" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="Amount">Amount:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="number" id="amount" name="amount" [(ngModel)]="wingdetailsForm.amount" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="east">East:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="text" id="east" name="east" [(ngModel)]="wingdetailsForm.east" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="west">West:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="text" id="west" name="west" [(ngModel)]="wingdetailsForm.west" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="north">North:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="text" id="north" name="north" [(ngModel)]="wingdetailsForm.north" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12" for="south">South:</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control form-control-line" type="text" id="south" name="south" [(ngModel)]="wingdetailsForm.south" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success">Save Wing Detail</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>

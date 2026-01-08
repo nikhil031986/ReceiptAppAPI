@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Receipt.API;
+using Receipt.Application.Commands;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
@@ -66,6 +67,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddAppDI();
 
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo
     {

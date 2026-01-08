@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,15 @@ export class LocalStorageService {
   private userloginName = new BehaviorSubject<string>('');
   private userId = new BehaviorSubject<number>(0);
   private currentSiteId = new BehaviorSubject<number>(0);
-  private localStorage: Storage;
   isLoggedIn$: Observable<boolean> = this.loggedIn.asObservable();
   userloginName$: Observable<string> = this.userloginName.asObservable();
   userId$: Observable<number> = this.userId.asObservable();
   currentSiteId$: Observable<number> = this.currentSiteId.asObservable();
-  constructor(@Inject(DOCUMENT) private document: Document, private http: HttpClient, private router: Router) {
-    this.localStorage = this.document.defaultView?.localStorage!;
+  constructor(
+   private authService: AuthService) {
   }  
 
   setToken(token: string) {
-    this.localStorage.setItem('token', token);
     this.loggedIn.next(true);
   }
 
@@ -39,9 +38,6 @@ export class LocalStorageService {
     this.currentSiteId.next(siteId);
   }
 
-  getToken(): string | null {
-    return this.localStorage ? this.localStorage.getItem('token') : null;
-  }
   getUserName(): string | null {
     return this.userloginName.getValue();
   }
@@ -53,7 +49,7 @@ export class LocalStorageService {
   }
   
   logout() {
-    this.localStorage.removeItem('token');
+    this.authService.clearToken();
     this.loggedIn.next(false);
     this.userloginName.next('');
     this.userId.next(0);

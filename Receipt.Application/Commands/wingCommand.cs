@@ -42,6 +42,17 @@ namespace Receipt.Application.Commands
         }
     }
 
+    public record DeActivewingDetailCommand(int wingDetailId) : IRequest<bool>;
+
+    internal class DeActivewingDetailCommandHandler(IWingRepositories wingRepositories)
+        : IRequestHandler<DeActivewingDetailCommand, bool>
+    {
+        public async Task<bool> Handle(DeActivewingDetailCommand request, CancellationToken cancellationToken)
+        {
+            return await wingRepositories.DeleteWingDetail(request.wingDetailId);
+        }
+    }
+
     public record DeletewingCommand(int wingMasterId) : IRequest<bool>;
     internal class DeletewingCommandHandler(IWingRepositories wingRepositories)
         : IRequestHandler<DeletewingCommand, bool>
@@ -49,6 +60,17 @@ namespace Receipt.Application.Commands
         public async Task<bool> Handle(DeletewingCommand request, CancellationToken cancellationToken)
         {
             return await wingRepositories.DeletewingAsync(request.wingMasterId);
+        }
+    }
+
+    public record AddAndUpdateWingCommand(WingDetail wingDetail) : IRequest<WingDetail>;
+
+    internal class AddAndUpdateWingCommandHandler(IWingRepositories wingRepositories)
+        : IRequestHandler<AddAndUpdateWingCommand, WingDetail>
+    {
+        public async Task<WingDetail> Handle(AddAndUpdateWingCommand request, CancellationToken cancellationToken)
+        {
+            return await wingRepositories.AddAndUpdateWingDetails(request.wingDetail);
         }
     }
 

@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+        <h3>Wings Information</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="card">
+        <div class="card-block bg-info">
+            <h4 class="text-white card-title p-2">{{ card.displayName }}</h4>
+            <h6 class="p-2 card-subtitle text-white m-b-0 op-5">Checkout wing information</h6>
+        </div>
+        <div class="card-block">
+              <div class="message-box contact-box">
+                <h2 class="add-ct-btn">
+                    <button type="button" class="btn btn-circle btn-lg btn-success waves-effect waves-dark" (click)="openWingDetails(card.wingMasterId)">
+                        <i class="mdi mdi-pencil-box"></i>
+                    </button>
+                </h2>
+                <div class="message-widget contact-widget">
+                    <div class="table-responsive">
+                         <table class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th *ngIf="showIdColumn">wingDetailsId</th>
+                                    <th>Display Name</th>
+                                    <th>Floar Count</th> 
+                                    <th>House Count</th> 
+                                    <th>Start Number</th>
+                                    <th>End Number</th>   
+                                    <th></th>                                                          
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let detail of wings; let i = index">
+                                    <td *ngIf="showIdColumn">
+                                        {{detail.wingMasterId}}
+                                    </td>
+                                    <td>
+                                        {{detail.displayName}}
+                                    </td>
+                                    <td>
+                                        {{detail.floarCount}}
+                                    </td>
+                                    <td>
+                                        {{detail.houseCount}}
+                                    </td>
+                                    <td>
+                                        {{detail.startNumber}}
+                                    </td>
+                                    <td>
+                                        {{detail.endNumber}}
+                                    </td>
+                                    <td>
+                                        <button title=" " class="btn m-2 btn-primary" type="button" (click)="openEditWing(detail.wingMasterId)">
+                                            <i class="mdi mdi-account-edit"></i>
+                                        </button> 
+                                    </td>
+                                </tr>
+                            </tbody>
+                         </table>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,11 @@
 import { Component,OnInit } from '@angular/core';
 import { on } from 'events';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { LoginService } from '../service/login.service';
 import { LocalStorageService } from '../service/local-storage.service';
 import { error } from 'console';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-loginpage',
@@ -18,7 +19,9 @@ export class LoginpageComponent implements OnInit {
   errorMessage: string = '';
   constructor(private loginService: LoginService,
      private localStorageService: LocalStorageService,
-     private router: Router) { }
+     private router: Router,
+    private authService: AuthService,
+    private route: ActivatedRoute) { }
   ngOnInit(): void {
     // Initialization logic if needed
   }
@@ -37,11 +40,13 @@ export class LoginpageComponent implements OnInit {
       } 
      this.loginService.userLogin(this.username, this.password).subscribe((response: any) => {
         if (response) {
-            console.log('Login successful', response);
+          console.log('Login successful', response);
+            this.authService.setToken(response.data.jwToken);  
             this.localStorageService.setToken(response.data.jwToken);
-            this.localStorageService.setUserId(response.data.id);
-            this.localStorageService.setUserName(response.data.userName);
-            this.router.navigate(['/home']);
+            this.authService.setUserId(response.data.id);
+            this.authService.setUserName(response.data.userName);
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home'; 
+            this.router.navigate([returnUrl]);
           }
           else {
             //;

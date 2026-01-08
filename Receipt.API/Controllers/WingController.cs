@@ -119,5 +119,29 @@ namespace Receipt.API.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("AddAndUpdateWingDetails")]
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> AddAndUpdateWingDetails([FromBody] WingDetail wingDetail)
+        {
+            var result = await sender.Send(new AddAndUpdateWingCommand(wingDetail));
+            if (result == null)
+            {
+                return BadRequest("Wing Detail not updated into system. Please try again.");
+            }
+            return Ok(result);
+        }
+
+        [HttpDelete("DeleteWingDetail/{wingDetailid}")]
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> DeleteWingDetail([FromRoute] int wingDetailid)
+        {
+            var result = await sender.Send(new DeActivewingDetailCommand(wingDetailid));
+            if (!result)
+            {
+                return BadRequest("Wing detail not deleted from the system. Please try again.");
+            }
+            return Ok(result);
+        }
     }
 }

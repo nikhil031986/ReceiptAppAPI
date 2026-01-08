@@ -18,5 +18,7 @@ namespace Receipt.Domain.Interfaces
         Task<IEnumerable<WingDetail>> GetWingDetails(int wingMasterId);
         Task<WingDetail> GetWingDetailsByIdAsync(int wigDetailId);
         Task<IEnumerable<WingMaster>> GetDataFromDB(System.Linq.Expressions.Expression<Func<WingMaster, bool>> expression = null);
+        Task<WingDetail> AddAndUpdateWingDetails(WingDetail wingDetail);
+        Task<bool> DeleteWingDetail(int wingDetailId);
     }
 }

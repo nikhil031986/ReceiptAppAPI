@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from '../service/local-storage.service';
 import { WingsService } from '../service/wings.service';
 import { NgIf,NgFor } from '@angular/common';
+
+declare var c3: any;
 @Component({
   selector: 'app-homepage',
   imports: [NgIf,NgFor],
@@ -27,11 +29,44 @@ export class HomepageComponent implements OnInit {
        this.getAllWings();
       }
     });
-    if (!this.IsUserLogin) {
-      this.router.navigate(['/login']);
-    }
+    // if (!this.IsUserLogin) {
+    //   this.router.navigate(['/login']);
+    // }
   }
   
+  CreateChart():void{
+    var chart = c3.generate({
+        bindto: '#visitor',
+        data: {
+            columns: [
+                ['Other', 30],
+                ['Desktop', 10],
+                ['Tablet', 40],
+                ['Mobile', 50],
+            ],
+
+            type: 'donut',
+        },
+        donut: {
+            label: {
+                show: false
+            },
+            title: "Our visitor",
+            width: 20,
+
+        },
+
+        legend: {
+            hide: true
+                //or hide: 'data1'
+                //or hide: ['data1', 'data2']
+        },
+        color: {
+            pattern: ['#eceff1', '#745af2', '#26c6da', '#1e88e5']
+        }
+    });
+  }
+
   getAllWings(): void {
     if(!this.IsUserLogin){
       return;
@@ -47,5 +82,10 @@ export class HomepageComponent implements OnInit {
       }
     );
   }
-
+  openWingDetails(wingId: number): void {
+    if(wingId <= 0){
+      return;
+    }
+    this.router.navigate(['/wing-details', wingId]);
+  }
 }
