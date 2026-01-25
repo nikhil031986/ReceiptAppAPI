@@ -15,7 +15,8 @@ namespace Receipt.Infra.Repositories
                 Include(i => i.WingDetail).ToListAsync();
         }
         public async Task<IEnumerable<ReceiptDetail>> GetDataFromDB(Expression<Func<ReceiptDetail, bool>> expression = null)
-        {             if (expression == null)
+        {            
+            if (expression == null)
             {
                 return await appDbContext.receiptDetails.Include(c => c.Customer).
                     Include(w => w.WingMaster).
@@ -23,9 +24,13 @@ namespace Receipt.Infra.Repositories
             }
             else
             {
-                return await appDbContext.receiptDetails.Include(c => c.Customer).
-                    Include(w => w.WingMaster).
-                    Include(i => i.WingDetail).Where(expression).ToListAsync();
+                return await appDbContext.receiptDetails
+                .Include(r => r.Customer)
+                    .ThenInclude(c => c.CustomerDetails.Where(d => d.IsMain == true))
+                .Include(r => r.WingMaster)
+                .Include(r => r.WingDetail)
+                .Where(expression)
+                .ToListAsync();
             }
         }
 

@@ -18,11 +18,31 @@ namespace Receipt.Infra.Repositories
                                     && x.Password.Equals(password) && x.IsActive==true);
         }
 
+        public async Task<UserMaster> GetUserById(int userId)
+        {
+            return await appDbContext.userMasters
+                   .Include(x=> x.usersSite)
+                .SingleOrDefaultAsync(x => x.UserId== userId && x.IsActive==true);
+        }
         public async Task<UserMaster> AddUser(UserMaster userMaster)
         {
             appDbContext.userMasters.Add(userMaster);
             await appDbContext.SaveChangesAsync();
             return userMaster;
+        }
+        
+        public async Task<IEnumerable<UserMaster>> GetUserBySiteId(int siteId)
+        {
+            var userSites = await appDbContext.userSites
+                                .Where(us => us.SiteId == siteId && us.IsActive == true)
+                                .ToListAsync();
+            var userIds = userSites.Select(us => us.UserId).Distinct().ToList();
+            var users = await appDbContext.userMasters
+                                .Include(x=> x.usersSite)
+                                .Include(x=> x.siteMasters)
+                                .Where(um => userIds.Contains(um.UserId) && um.IsActive == true)
+                                .ToListAsync();
+            return users;
         }
 
         public async Task<UserMaster> UpdateUser(int userId,UserMaster userMaster)

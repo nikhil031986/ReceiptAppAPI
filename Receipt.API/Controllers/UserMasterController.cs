@@ -63,6 +63,19 @@ namespace Receipt.API.Controllers
         }
 
         [Authorize]
+        [HttpGet("GetUserById/{userMasterId}")]
+        [Authorize(Roles = "Client,Admin")]
+        public async Task<IActionResult> GetUserById([FromRoute] int userMasterId)
+        {
+            var result = await sender.Send(new GetUserByIdQueries(userMasterId));
+            if (result == null)
+            {
+                return NotFound("User not found with the provided ID.");
+            }
+            return Ok(result);
+        }
+
+        [Authorize]
         [HttpPost("UpdateUser/{userMasterId}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUser([FromRoute] int userMasterId, [FromBody] UserMaster userMaster)
@@ -84,6 +97,18 @@ namespace Receipt.API.Controllers
             if (result == false)
             {
                 return BadRequest("User not Deactivated into system. Please try agen.");
+            }
+            return Ok(result);
+        }
+        [Authorize]
+        [HttpGet("getUserBySiteId/{siteId}")]
+        [Authorize(Roles = "Admin,Client")]
+        public async Task<IActionResult> getUserBySiteId([FromRoute] int siteId)
+        {
+            var result = await sender.Send(new GetUserBySiteIdQueries(siteId));
+            if (result == null || !result.Any())
+            {
+                return NotFound("No users found for the given site ID.");
             }
             return Ok(result);
         }

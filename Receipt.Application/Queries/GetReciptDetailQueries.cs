@@ -31,6 +31,17 @@ namespace Receipt.Application.Queries
         }
     }
 
+    public record GetReceiptDetailBySiteIdQueries(int siteId) : IRequest<IEnumerable<ReceiptDetail>>;
+    internal class GetReceiptDetailBySiteIdQueriesHandler(IReceiptRepositories receiptRepositories)
+        : IRequestHandler<GetReceiptDetailBySiteIdQueries, IEnumerable<ReceiptDetail>>
+    {
+        public async Task<IEnumerable<ReceiptDetail>> Handle(GetReceiptDetailBySiteIdQueries request, CancellationToken cancellationToken)
+        {
+            var receipt = await receiptRepositories.GetDataFromDB(x => x.SiteId == request.siteId && x.Customer.IsActive == true);
+            return receipt;
+        }
+    }
+
     public record GetReceiptDetailsByCustomerIdQueries(int customerId) : IRequest<IEnumerable<ReceiptDetail>>;  
     internal class GetReceiptDetailsByCustomerIdQueriesHandler(IReceiptRepositories receiptRepositories)
         : IRequestHandler<GetReceiptDetailsByCustomerIdQueries, IEnumerable<ReceiptDetail>>

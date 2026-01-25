@@ -56,6 +56,17 @@ namespace Receipt.API.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("GetReceiptDetailsBySiteId/{siteId}")]
+        [Authorize(Roles = "Client,Admin")]
+        public async Task<IActionResult> GetReceiptDetailsBySiteId([FromRoute] int siteId)
+        {
+            var result = await sender.Send(new GetReceiptDetailBySiteIdQueries(siteId));
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
         [HttpGet("GetAllReceiptDetails")]
         [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> GetAllReceiptDetails()

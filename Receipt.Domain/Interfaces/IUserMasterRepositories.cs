@@ -10,5 +10,7 @@ namespace Receipt.Domain.Interfaces
         Task<UserMaster> AddUser(UserMaster userMaster);
         Task<UserMaster> UpdateUser(int userId, UserMaster userMaster);
         Task<bool> DeActiveUser(int userId); 
+        Task<IEnumerable<UserMaster>> GetUserBySiteId(int siteId);
+        Task<UserMaster> GetUserById(int userId);
     }
 }

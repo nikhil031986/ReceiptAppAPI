@@ -4,6 +4,8 @@ import { WingsService } from '../service/wings.service';
 import { LocalStorageService } from '../service/local-storage.service';
 import { FormsModule} from '@angular/forms';
 import { NgFor,NgIf } from '@angular/common';
+import { response } from 'express';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wingdetail',
@@ -61,8 +63,11 @@ export class WingdetailComponent implements OnInit {
     }]
   };
 
-  constructor(private router: Router,private route: ActivatedRoute, private wingsService: WingsService,
-    private localStorageService: LocalStorageService
+  constructor(private router: Router,
+    private route: ActivatedRoute, 
+    private wingsService: WingsService,
+    private localStorageService: LocalStorageService,
+    private toastrService : ToastrService
   ) { }
 
   ngOnInit(): void {    
@@ -127,7 +132,8 @@ export class WingdetailComponent implements OnInit {
   }
 
   getWingDetails(): void {
-    this.wingsService.getwingById(this.wingId).subscribe(
+    if(this.wingId>0){
+      this.wingsService.getwingById(this.wingId).subscribe(
       (data) => {
         this.wingDetails = data;
         console.log('Wing details fetched:', this.wingDetails); 
@@ -163,18 +169,45 @@ export class WingdetailComponent implements OnInit {
         console.error('Error fetching wing details:', error);
       }
     );
+    }
+    
   }
 
   Save(): void {
-    this.wingsService.updateWing(this.formData).subscribe(
-      (response) => {
-        console.log('Wing updated successfully:', response);
-        this.router.navigate(['/home']);
-      },
-      (error) => {
-        console.error('Error updating wing:', error);
-      }
-    );
+    if(this.formData.wingMasterId > 0){
+       this.wingsService.updateWing(this.formData).subscribe(
+          (response) => {
+            console.log('Wing updated successfully:', response);
+            this.toastrService.success('wing updated successfully!', 'Success');
+            this.router.navigate(['/home']);
+          },
+          (error) => {
+            this.toastrService.error('Something went wrong!', 'Error');
+          }
+        );
+    }
+    else{
+      const newwing ={
+        wingMasterId: this.formData.wingMasterId,
+        displayName: this.formData.displayName,
+        floarCount: this.formData.floarCount,
+        houseCount: this.formData.houseCount,
+        startNumber:this.formData.startNumber,
+        endNumber:this.formData.endNumber,
+        siteId:0
+      };
+
+      this.wingsService.addNewWing(newwing).subscribe(
+        (response)=>{
+          this.toastrService.success('wing added successfully!', 'Success');
+          this.router.navigate(['/home']);
+        },
+        (error) => {
+            this.toastrService.error('Something went wrong!', 'Error');
+          }
+      );
+    }
+   
   }
 
   SaveWingDetails(id:string): void {
@@ -183,12 +216,12 @@ export class WingdetailComponent implements OnInit {
 
     this.wingsService.submitWingDetails(this.wingdetailsForm).subscribe(
       (response) => {
-        console.log('Wing details saved successfully:', response);
+        this.toastrService.success('wing detail save successfully!', 'Success');
         this.closeWingDetailModal(id);
         this.getWingDetails(); // Refresh the wing details after saving
       },
       (error) => {
-        console.error('Error saving wing details:', error);
+        this.toastrService.error('Something went wrong!', 'Error');
       }
     );    
   }
@@ -196,11 +229,11 @@ export class WingdetailComponent implements OnInit {
   DeleteWingDetails(wingDetailId:number): void {
     this.wingsService.deleteWingDetail(wingDetailId).subscribe(
       (response) => {
-        console.log('Wing detail deleted successfully:', response);
+        this.toastrService.success('wing detail deleted successfully!', 'Success');
         this.getWingDetails(); // Refresh the wing details after deletion
       },
       (error) => {
-        console.error('Error deleting wing detail:', error);
+        this.toastrService.error('Something went wrong!', 'Error');
       }
     );  
   }

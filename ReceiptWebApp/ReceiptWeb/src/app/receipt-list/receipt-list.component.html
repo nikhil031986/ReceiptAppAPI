@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="card">
+        <div class="card-block bg-info">
+            <h4 class="text-white card-title p-2">Receipt List</h4>
+            <div class="p-2 card-subtitle bg-info">
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    [(ngModel)]="searchText"
+                    class="form-control"
+                />
+                <span class="w-auto" >Total Records {{total}}</span>
+            </div>
+        </div>
+        <div class="card-block">
+              <div class="message-box contact-box">
+                <h2 class="add-ct-btn">
+                    <button type="button" class="btn btn-circle btn-lg btn-success waves-effect waves-dark" (click)="openWingDetails()">
+                        <i class="mdi mdi-pencil-box"></i> 
+                        Add
+                    </button>
+                </h2>
+                <div class="message-widget contact-widget">
+                    <div class="table-responsive">
+                         <table class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th *ngIf="showIdColumn">ReceiptId</th>
+                                    <th>Receipt No</th>
+                                    <th>Receipt Date</th>
+                                    <th>Customer Name</th>
+                                    <th>Flat/ShopNo</th>
+                                    <th>Cheq/RTGS/NEFT/IMPS</th>
+                                    <th>BANK Name</th>
+                                    <th>Branch Name</th>
+                                    <th>Amount</th>
+                                    <th>Amount word</th>
+                                    <th>Payment Date</th>
+                                    <th>Is Cancel</th>
+                                    <th>Is Printed</th>  
+                                    <th></th>                                                          
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let detail of filterData | slice:recordNumber:endrecordNumber; let i = index">
+                                    <td *ngIf="showIdColumn">
+                                        {{detail.receiptId}}
+                                    </td>
+                                    <td>
+                                        {{detail.receiptNo}}
+                                    </td>
+                                    <td>
+                                        {{detail.receiptDate}}
+                                    </td>
+                                    <td>
+                                        {{detail.customerName}}
+                                    </td>
+                                    <td>
+                                        {{detail.flat_shopNo}}
+                                    </td>
+                                    <td>
+                                        {{detail.cheq_RTGS_NEFT_IMPS}}
+                                    </td>
+                                    <td>
+                                        {{detail.bankName}}
+                                    </td>
+                                    <td>
+                                        {{detail.branchName}}
+                                    </td>
+                                    <td>
+                                        {{detail.amount}}
+                                    </td>
+                                    <td>
+                                        {{detail.amountWord}}
+                                    </td>
+                                    <td>
+                                        {{detail.paymentDate}}
+                                    </td>
+                                    <td>
+                                        <i *ngIf="detail.isCancel" class="mdi mdi-checkbox-marked-outline"></i>
+                                        <i *ngIf="!detail.isCancel" class="mdi mdi-checkbox-blank-outline"></i>
+                                    </td>
+                                    <td>
+                                          <i *ngIf="detail.isPrint" class="mdi mdi-checkbox-marked-outline"></i>
+                                        <i *ngIf="!detail.isPrint" class="mdi mdi-checkbox-blank-outline"></i>
+                                    </td>
+                                    <td>
+                                        <button title=" " class="btn m-2 btn-primary" type="button" (click)="openEditWing(detail.receiptId)">
+                                            <i class="mdi mdi-account-edit"></i>
+                                            Edit
+                                        </button> 
+                                    </td>
+                                </tr>
+                            </tbody>
+                         </table>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <ul class="pagination justify-content-center d-flex">
+                    <li class="pate-item" (click)="prevous()" >
+                        <span class="page-link">
+                            <i class="mdi mdi-skip-previous-circle"></i>
+                        </span>
+                    </li>
+                    <li
+                        *ngFor="let page of pages"
+                        [ngClass]="{ 'page-item': true, active: currentPage === page }"
+                        (click)="changePage(page)"
+                    >
+                        <span class="page-link">{{ page }}</span>
+                    </li>
+                    <li class="pate-item" (click)="nextpage()">
+                        <span class="page-link">
+                            <i class="mdi mdi-skip-next-circle"></i>
+                        </span>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

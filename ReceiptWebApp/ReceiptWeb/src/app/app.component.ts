@@ -6,7 +6,7 @@ import { RoutpageComponent } from "./routpage/routpage.component";
 import { filter,takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { LocalStorageService } from './service/local-storage.service';
-
+import { ToastrModule } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -18,15 +18,17 @@ export class AppComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>(); // For unsubscribing  
   title = 'ReceiptWeb';
   private readonly PUBLIC_ROUTES = ['/login', '/register', '/forgot-password'];  
-  private readonly DEFAULT_PROTECTED_ROUTE = '/home'; // Redirect here after login  
+  private readonly DEFAULT_PROTECTED_ROUTE =['/home','/wing','/customerlist','/receiptlist','/customer','/wing-details','/userlist']; // Redirect here after login  
   private readonly DEFAULT_PUBLIC_ROUTE = '/login'; // Redirect here if unauthenticated
 
   constructor(private authService: AuthService, 
     private router: Router,
     private localStorageService: LocalStorageService) {}
+    
   ngOnInit(): void {
     this.detectRouteChanges();
   }
+
   private detectRouteChanges(): void {
    this.router.events  
       .pipe(  
@@ -47,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
    // Avoid infinite redirects: Skip if already on the target route  
       if (  
         (!isAuthenticated && currentUrl === this.DEFAULT_PUBLIC_ROUTE) ||  
-        (isAuthenticated && currentUrl === this.DEFAULT_PROTECTED_ROUTE)  
+        (isAuthenticated &&  this.DEFAULT_PROTECTED_ROUTE.includes(currentUrl))  
       ) {  
         return;  
       }  

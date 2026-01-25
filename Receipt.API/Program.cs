@@ -74,6 +74,33 @@ builder.Services.AddSwaggerGen(c => {
         Title = "ReceiptAPPV1",
         Version = "v1"
     });
+
+    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    {
+        Description = "Enter API Key into the field",
+        Name = "X-API-KEY",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "ApiKeyScheme"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "ApiKey"
+                },
+                Scheme = "ApiKeyScheme",
+                Name = "X-API-KEY",
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
         Name = "Authorization",
@@ -108,6 +135,64 @@ app.UseCors(builder => builder
        .AllowAnyOrigin()
     );
 
+// API key middleware — insert after app.UseCors(...) and before app.UseAuthentication()
+app.Use(async (context, next) =>
+{
+    var path = context.Request.Path.Value?.ToLowerInvariant() ?? string.Empty;
+
+    // Allow Swagger UI and assets in Development (RoutePrefix = "")
+    if (app.Environment.IsDevelopment())
+    {
+        if (path == "/"
+            || path.StartsWith("/swagger")
+            || path.StartsWith("/swagger-ui")
+            || path.StartsWith("/swagger/v1/swagger.json")
+            || path.StartsWith("/favicon.ico"))
+        {
+            await next();
+            return;
+        }
+    }
+
+    // List of public endpoints that should NOT require the API key (lowercase)
+    var publicPaths = new[]
+    {
+        "/api/usermaster/login", // allow login without X-API-KEY so clients can request tokens
+        // add other public endpoints here (e.g. "/health", "/api/public/...") as needed
+    };
+
+    if (publicPaths.Any(p => path.StartsWith(p)))
+    {
+        await next();
+        return;
+    }
+
+    var configApiKey = builder.Configuration["ApiKey"];
+    if (string.IsNullOrWhiteSpace(configApiKey))
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        await context.Response.WriteAsync("API key not configured.");
+        return;
+    }
+
+    if (!context.Request.Headers.TryGetValue("X-API-KEY", out var extractedApiKeyValues)
+        || string.IsNullOrWhiteSpace(extractedApiKeyValues.ToString()))
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+        await context.Response.WriteAsync("API Key missing.");
+        return;
+    }
+
+    var extractedApiKey = extractedApiKeyValues.ToString();
+    if (!string.Equals(extractedApiKey, configApiKey, StringComparison.Ordinal))
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+        await context.Response.WriteAsync("Invalid API Key.");
+        return;
+    }
+
+    await next();
+});
 
 app.UseAuthentication();
 
@@ -135,34 +220,6 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
     });
 }
-
-app.Use(async (context, next) =>
-{
-    var configApiKey = builder.Configuration["ApiKey"];
-    if (string.IsNullOrWhiteSpace(configApiKey))
-    {
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        await context.Response.WriteAsync("API key not configured.");
-        return;
-    }
-
-    // Check for API key in header
-    if (!context.Request.Headers.TryGetValue("X-API-KEY", out var extractedApiKey))
-    {
-        context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-        await context.Response.WriteAsync("API Key missing.");
-        return;
-    }
-
-    if (!string.Equals(extractedApiKey, configApiKey))
-    {
-        context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-        await context.Response.WriteAsync("Invalid API Key.");
-        return;
-    }
-
-    await next();
-});
 
 app.UseHttpsRedirection();
 

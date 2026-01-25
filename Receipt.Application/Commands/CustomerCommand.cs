@@ -53,4 +53,26 @@ namespace Receipt.Application.Commands
         }
     }
 
+    public record AddUpdateCustomerDetailsCommand(CustomerDetail CustomerDetails) : IRequest<CustomerDetail>;
+
+    internal class AddUpdateCustomerDetailsCommandHandler(ICustomerRepositories customerRepositories)
+        : IRequestHandler<AddUpdateCustomerDetailsCommand, CustomerDetail>
+    {
+        public async Task<CustomerDetail> Handle(AddUpdateCustomerDetailsCommand request, CancellationToken cancellationToken)
+        {
+            return await customerRepositories.AddUpdateCustomerDetail(request.CustomerDetails);
+        }
+    }
+
+    public record DeleteCustomerDetailCommand(int customerDetailId) : IRequest<bool>;
+
+    internal class DeleteCustomerDetailCommandHandler(ICustomerRepositories customerRepositories)
+        : IRequestHandler<DeleteCustomerDetailCommand, bool>
+    {
+        public async Task<bool> Handle(DeleteCustomerDetailCommand request, CancellationToken cancellationToken)
+        {
+            return await customerRepositories.DeleteCustomerDetail(request.customerDetailId);
+        }
+    }
+
 }

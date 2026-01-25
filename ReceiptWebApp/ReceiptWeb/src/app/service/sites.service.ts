@@ -22,13 +22,13 @@ export class SitesService {
     this.token = this.authService.getToken();
     const headers = new HttpHeaders({ 
       'Content-Type': 'application/json; charset=utf-8',  
-      'XApiKey':'pgH7QzFHJx4w46fI~5Uzi4RvtTwlEXp',
+      'X-API-KEY':'C10D6AB6-8CBF-45F9-A5C2-4769CE171DF9',
       'Authorization': `Bearer ${this.token}`
     });
     return { headers: headers };
   }
 
   getSitesList(): Observable<any> {
-    return this.http.get(this.apiURl+"/UserMaster/GetUserSite/"+this.localStorageService.getUserId(), this.getHttpOptions());
+      return this.http.get(this.apiURl+"/UserMaster/GetUserSite/"+this.localStorageService.getUserId(), this.getHttpOptions());
   }
 }

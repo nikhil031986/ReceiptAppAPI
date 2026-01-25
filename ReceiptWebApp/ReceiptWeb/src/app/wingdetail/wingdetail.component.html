@@ -57,7 +57,7 @@
 
                             <div class="form-group">
                                
-                                <div class="row">
+                                <div class="row" *ngIf="formData.wingMasterId>0">
                                     <div class="card">
                                         <div class="card-body">
                                              <div class="row">
@@ -68,7 +68,7 @@
                                                     <button class="btn m-2 btn-primary" type="button" (click)="AddNewWingDetails('editwingDetails')">Add Wing Detail</button> 
                                                 </div>  
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-12" >
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered table-striped">
                                                         <thead class="table-dark">
@@ -141,9 +141,11 @@
                                                                 <td>
                                                                     <button title=" " class="btn m-2 btn-primary" type="button" (click)="openModal('editwingDetails', detail.wingDetailId)">
                                                                         <i class="mdi mdi-account-edit"></i>
+                                                                        Edit
                                                                     </button> 
                                                                     <button title=" " class="btn btn-danger" type="button" (click)="DeleteWingDetails(detail.wingDetailId)">
                                                                         <i class="mdi mdi-delete"></i>
+                                                                        Remove
                                                                     </button>
                                                                 </td>
                                                             </tr>

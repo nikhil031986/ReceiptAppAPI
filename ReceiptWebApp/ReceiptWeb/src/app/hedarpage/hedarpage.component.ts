@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../service/local-storage.service';
-import { Router, ActivatedRoute, NavigationEnd  } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd,RouterModule  } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { filter } from 'rxjs';
+
   
 @Component({
   selector: 'app-hedarpage',
   standalone: true,
-  imports: [NgIf],
-  templateUrl: './hedarpage.component.html',
+  imports: [NgIf,RouterModule],
+  templateUrl:'./hedarpage.component.html',
   styleUrls: ['./hedarpage.component.css']
 })
 export class HedarpageComponent implements OnInit {
@@ -18,7 +19,7 @@ export class HedarpageComponent implements OnInit {
 
   constructor(private localStorageService: LocalStorageService,
    private router: Router, 
-   private activatedRoute: ActivatedRoute) { }
+   private activatedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
    this.localStorageService.isLoggedIn$.subscribe(status => {
@@ -43,6 +44,11 @@ export class HedarpageComponent implements OnInit {
 
   getUserLoginStatus(): boolean {
     return this.IsUserLogin;
+  }
+  
+  activeTab(id:string):void{
+    var getcontrol = document.getElementById(id);
+    getcontrol?.classList.add('active');
   }
 
   logout() {

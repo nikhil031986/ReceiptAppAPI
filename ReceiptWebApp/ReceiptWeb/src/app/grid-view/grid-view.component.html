@@ -1,0 +1,35 @@
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <ng-container *ngFor="let col of columns">
+                <th *ngIf="!col.hideColumn">{{ col.header }}</th>
+            </ng-container>
+            <th></th>
+        </thead>
+        <tbody>
+             <tr *ngFor="let row of data">
+                 <ng-container *ngFor="let col of columns">
+                     <td *ngIf="!col.hideColumn">
+                        <ng-container *ngIf="col.isBoolean; else normalField">
+                            <i *ngIf="row[col.field]" class="mdi mdi-checkbox-marked-outline"></i>
+                            <i *ngIf="!row[col.field]" class="mdi mdi-checkbox-blank-outline"></i>
+                        </ng-container>
+                        <ng-template #normalField>
+                            {{ row[col.field] }}
+                        </ng-template>
+                    </td>
+                 </ng-container>
+                 <td>
+                    <button title=" " class="btn m-2 btn-primary" type="button" (click)="onEditRecord(row)">
+                        <i class="mdi mdi-account-edit"></i>
+                        Edit
+                    </button> 
+                    <button title=" " class="btn btn-danger" type="button" (click)="onDeleteRecord(row)">
+                        <i class="mdi mdi-delete"></i>
+                        Delete
+                    </button>
+                 </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

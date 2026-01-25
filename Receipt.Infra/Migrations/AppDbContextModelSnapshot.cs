@@ -593,7 +593,7 @@ namespace Receipt.Infra.Migrations
                         .IsRequired();
 
                     b.HasOne("Receipt.Domain.Entity.UserMaster", "User")
-                        .WithMany()
+                        .WithMany("usersSite")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -651,6 +651,8 @@ namespace Receipt.Infra.Migrations
             modelBuilder.Entity("Receipt.Domain.Entity.UserMaster", b =>
                 {
                     b.Navigation("siteMasters");
+
+                    b.Navigation("usersSite");
                 });
 
             modelBuilder.Entity("Receipt.Domain.Entity.WingDetail", b =>

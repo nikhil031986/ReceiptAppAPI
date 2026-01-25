@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router,RouterModule } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { SitesService } from '../service/sites.service';
 import { NgForOf, NgIf } from '@angular/common';
@@ -11,7 +11,7 @@ import { CapitalizePipePipe } from '../capitalize-pipe.pipe';
 @Component({
   selector: 'app-routpage',
   standalone: true,
-  imports: [NgForOf, FormsModule, NgIf,CapitalizePipePipe],
+  imports: [NgForOf, FormsModule, NgIf,CapitalizePipePipe,RouterModule],
   templateUrl: './routpage.component.html',
   styleUrl: './routpage.component.css'
 })
@@ -53,7 +53,8 @@ export class RoutpageComponent implements OnInit {
   }
 
   getSitesList(): void {
-    if(!this.IsUserLogin){
+    if(!this.IsUserLogin || this.localStorageService.getUserId() === null || 
+   this.localStorageService.getUserId()===0){
       return;
     }
     this.sites=[];

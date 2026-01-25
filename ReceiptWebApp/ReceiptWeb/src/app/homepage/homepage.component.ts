@@ -2,12 +2,12 @@ import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../service/local-storage.service';
 import { WingsService } from '../service/wings.service';
-import { NgIf,NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 
 declare var c3: any;
 @Component({
   selector: 'app-homepage',
-  imports: [NgIf,NgFor],
+  imports: [NgFor],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })
@@ -29,6 +29,7 @@ export class HomepageComponent implements OnInit {
        this.getAllWings();
       }
     });
+    
     // if (!this.IsUserLogin) {
     //   this.router.navigate(['/login']);
     // }
@@ -69,6 +70,9 @@ export class HomepageComponent implements OnInit {
 
   getAllWings(): void {
     if(!this.IsUserLogin){
+      return;
+    }
+    if(this.wings.length > 0){
       return;
     }
     this.wings=[];

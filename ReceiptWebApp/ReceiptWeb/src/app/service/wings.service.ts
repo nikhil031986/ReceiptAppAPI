@@ -20,7 +20,7 @@ export class WingsService {
     this.token = this.authService.getToken();
     const headers = new HttpHeaders({ 
       'Content-Type': 'application/json; charset=utf-8',  
-      'XApiKey':'pgH7QzFHJx4w46fI~5Uzi4RvtTwlEXp',
+      'X-API-KEY':'C10D6AB6-8CBF-45F9-A5C2-4769CE171DF9',
       'Authorization': `Bearer ${this.token}`
     });
     return { headers: headers };
@@ -36,7 +36,11 @@ export class WingsService {
   getWingDetailsById(wingDetailId: number): Observable<any> {
     return this.http.get(this.apiURl+"/Wing/GetWingDetailsById/"+wingDetailId, this.getHttpOptions());
   }
-  
+  addNewWing(wing:any):Observable<any>{
+    var currentSitId =this.localStorageService.getCurrentSiteId();
+    wing.siteId=currentSitId;
+    return this.http.post(this.apiURl+"/Wing", wing, this.getHttpOptions());
+  }
   updateWing(wingData: any): Observable<any> {
     var currentSiteId = this.localStorageService.getCurrentSiteId();
     wingData.siteId = currentSiteId;

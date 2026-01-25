@@ -63,7 +63,7 @@ namespace Receipt.API.Controllers
 
         [HttpPost("UpdateCustomer")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateSite([FromBody] CustomerMaster customer)
+        public async Task<IActionResult> UpdateCustomer([FromBody] CustomerMaster customer)
         {
             var result = await sender.Send(new UpdateCustomerCommand(customer));
             if (result == null)
@@ -96,5 +96,42 @@ namespace Receipt.API.Controllers
             }
             return Ok(result);
         }
+
+        [HttpGet("GetCustomerDetail/{customerDetailId}")]
+        [Authorize(Roles = "Client,Admin")]
+        public async Task<IActionResult> GetCustomerDetail([FromRoute] int customerDetailId)
+        {
+            var result = await sender.Send(new GetCustomerDetailCommand(customerDetailId));
+            if (result == null)
+            {
+                return BadRequest("Customer detail not found in the system. please try agen.");
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("AddUpdateCustomerDetail")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddUpdateCustomerDetail([FromBody] CustomerDetail customerDetail)
+        {
+            var result = await sender.Send(new AddUpdateCustomerDetailsCommand(customerDetail));
+            if (result == null)
+            {
+                return BadRequest("Customer detail not save or update in the system. please try agen.");
+            }
+            return Ok(result);
+        }
+
+        [HttpDelete("DeleteCustomerDetail/{customerDetailId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteCustomerDetail([FromBody] int customerDetailId)
+        {
+            var result = await sender.Send(new DeleteCustomerDetailCommand(customerDetailId));
+            if (result == false)
+            {
+                return BadRequest("Customer detail not found in the system. please try agen.");
+            }
+            return Ok(result);
+        }
+
     }
 }
