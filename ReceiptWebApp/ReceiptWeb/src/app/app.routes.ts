@@ -10,4 +10,5 @@ export const routes: Routes = [
     {path: 'customer/:id',loadComponent:() => import('./customer-details/customer-details.component').then(m => m.CustomerDetailsComponent),canActivate:[AuthService]},
     {path: 'receiptlist',loadComponent:() => import('./receipt-list/receipt-list.component').then(m => m.ReceiptListComponent),canActivate:[AuthService]},
     {path: 'userlist',loadComponent:() => import('./user-list/user-list.component').then(m => m.UserListComponent),canActivate:[AuthService]},
+    {path: 'userdetail/:id',loadComponent:() => import('./user-detail/user-detail.component').then(m => m.UserDetailComponent),canActivate:[AuthService]},
 ];

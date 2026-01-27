@@ -22,6 +22,7 @@ namespace Receipt.Infra.Repositories
         {
             return await appDbContext.userMasters
                    .Include(x=> x.usersSite)
+                        .ThenInclude(x=> x.Site)
                 .SingleOrDefaultAsync(x => x.UserId== userId && x.IsActive==true);
         }
         public async Task<UserMaster> AddUser(UserMaster userMaster)

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Receipt.Application.Commands;
 using Receipt.Application.Queries;
@@ -8,6 +9,7 @@ using Receipt.Domain.Entity;
 
 namespace Receipt.API.Controllers
 {
+    [EnableCors("AllowAngularApp")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserMasterController(ISender sender) : ControllerBase

@@ -26,6 +26,7 @@ namespace Receipt.Infra.Repositories
             {
                 userSiteData.UserId = userSite.UserId;
                 userSiteData.SiteId = userSite.SiteId;
+                userSiteData.IsDefault = userSite.IsDefault;
                 await appDbContext.SaveChangesAsync();
                 return userSiteData;
             }

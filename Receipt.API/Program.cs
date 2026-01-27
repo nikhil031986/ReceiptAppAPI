@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Receipt.API;
@@ -9,27 +11,31 @@ using System.Security.Claims;
 using System.Text;
 
 
+var MyAllowSpecificOrigins = "AllowAngularApp";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration["ApiKey"] = "C10D6AB6-8CBF-45F9-A5C2-4769CE171DF9";
 
+// Register CORS policy with exact origin (no wildcard path)
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowOriginPolicy",
-        policy => policy
-            .WithOrigins("http://localhost:4200/*") 
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials()
-    );
+    options.AddPolicy(name:MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // Angular dev server
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();                
+        });
 });
+
 
 // Add services to the container.
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler =
-        System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+            System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
 
 builder.Services.AddAuthentication(options =>
@@ -54,12 +60,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization(options =>
 {
-    //options.AddPolicy("AtLeastTwoRoles", policy => policy.RequireClaim(ClaimTypes.Role, "Admin", ClaimTypes.Role, "Client"));
-    options.AddPolicy("Admin", policy =>
-       policy.RequireRole("Admin"));
-
-    options.AddPolicy("Client", policy =>
-    policy.RequireClaim("Client", "Client"));
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("Client", policy => policy.RequireClaim("Client", "Client"));
 });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -69,11 +71,7 @@ builder.Services.AddAppDI();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c => {
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "ReceiptAPPV1",
-        Version = "v1"
-    });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ReceiptAPPV1", Version = "v1" });
 
     c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
     {
@@ -88,11 +86,7 @@ builder.Services.AddSwaggerGen(c => {
         {
             new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "ApiKey"
-                },
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "ApiKey" },
                 Scheme = "ApiKeyScheme",
                 Name = "X-API-KEY",
                 In = ParameterLocation.Header
@@ -108,59 +102,57 @@ builder.Services.AddSwaggerGen(c => {
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+        Description = "JWT Authorization header using the Bearer scheme."
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement {
         {
             new OpenApiSecurityScheme {
-                Reference = new OpenApiReference {
-                    Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                }
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
             },
             new string[] {}
         }
     });
+    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 });
 
-
-
 var app = builder.Build();
-
+//app.UseHttpsRedirection();
+//app.UseStaticFiles();
 app.UseRouting();
 
-app.UseCors(builder => builder
-       .AllowAnyHeader()
-       .AllowAnyMethod()
-       .AllowAnyOrigin()
-    );
+// Apply the named CORS policy
+app.UseCors(MyAllowSpecificOrigins);
 
-// API key middleware — insert after app.UseCors(...) and before app.UseAuthentication()
+// API key middleware — after CORS, before authentication
 app.Use(async (context, next) =>
 {
     var path = context.Request.Path.Value?.ToLowerInvariant() ?? string.Empty;
 
-    // Allow Swagger UI and assets in Development (RoutePrefix = "")
-    if (app.Environment.IsDevelopment())
+    // Let preflight OPTIONS requests through so CORS middleware can respond
+    if (string.Equals(context.Request.Method, "OPTIONS", StringComparison.OrdinalIgnoreCase))
     {
-        if (path == "/"
-            || path.StartsWith("/swagger")
-            || path.StartsWith("/swagger-ui")
-            || path.StartsWith("/swagger/v1/swagger.json")
-            || path.StartsWith("/favicon.ico"))
-        {
-            await next();
-            return;
-        }
+        await next();
+        return;
     }
 
-    // List of public endpoints that should NOT require the API key (lowercase)
+    // Always allow Swagger UI and its static assets to be served
+    if (path == "/"
+        || path.StartsWith("/index")
+        || path.StartsWith("/swagger")
+        || path.StartsWith("/swagger-ui")
+        || path.StartsWith("/swagger/v1/swagger.json")
+        || path.StartsWith("/favicon.ico")
+        || path.StartsWith("/swagger-ui-assets"))
+    {
+        await next();
+        return;
+    }
+
+    // Public endpoints that don't require API key
     var publicPaths = new[]
     {
-        "/api/usermaster/login", // allow login without X-API-KEY so clients can request tokens
-        // add other public endpoints here (e.g. "/health", "/api/public/...") as needed
+        "/api/usermaster/login"
     };
-
     if (publicPaths.Any(p => path.StartsWith(p)))
     {
         await next();
@@ -194,40 +186,25 @@ app.Use(async (context, next) =>
     await next();
 });
 
-app.UseAuthentication();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
-
+// Serve Swagger UI (development only) before mapping controllers
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Receipt Application API V1");
-        c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
+        c.RoutePrefix = string.Empty; // root
     });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-
-
+// Map controllers once
 app.MapControllers();
-
-
 
 
 app.Run();

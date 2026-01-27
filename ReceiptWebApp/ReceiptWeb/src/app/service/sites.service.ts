@@ -31,4 +31,8 @@ export class SitesService {
   getSitesList(): Observable<any> {
       return this.http.get(this.apiURl+"/UserMaster/GetUserSite/"+this.localStorageService.getUserId(), this.getHttpOptions());
   }
+
+  getAllSitesList(): Observable<any> {
+      return this.http.get(this.apiURl+"/Site/GetSite", this.getHttpOptions());
+  }
 }

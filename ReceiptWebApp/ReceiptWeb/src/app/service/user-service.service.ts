@@ -29,4 +29,17 @@ export class UserServiceService {
   getUserList(): Observable<any>{
     return this.http.get(this.apiURl+"/UserMaster/getUserBySiteId/"+this.localStorageService.getCurrentSiteId(), this.getHttpOptions());
   }
+
+  getUserById(userId:number):Observable<any>{
+    return this.http.get(this.apiURl+"/UserMaster/GetUserById/"+userId, this.getHttpOptions());
+  }
+  submitUserSite(userId:Number,userSiteData:any):Observable<any>{
+    return this.http.post(this.apiURl+"/UserMaster/AddUserSiteCommand/"+userId, userSiteData, this.getHttpOptions());
+  }
+  updateUserSite(userId:Number,userSiteData:any):Observable<any>{
+    return this.http.post(this.apiURl+"/UserMaster/UpdateUserSiteCommand/"+userId, userSiteData, this.getHttpOptions());
+  }
+  deleteUserSite(userSiteId:Number):Observable<any>{
+    return this.http.delete(this.apiURl+"/UserMaster/DeleteUserSiteCommand/"+userSiteId, this.getHttpOptions());
+  }
 }

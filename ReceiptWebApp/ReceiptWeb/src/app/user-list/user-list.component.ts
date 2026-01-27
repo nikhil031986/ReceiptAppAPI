@@ -137,7 +137,7 @@ export class UserListComponent implements OnInit {
   }
 
     openEdituser(userId:Number):void{
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/user-details/'+userId; 
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/userdetail/'+userId; 
       this.router.navigate([returnUrl]);
     } 
 }

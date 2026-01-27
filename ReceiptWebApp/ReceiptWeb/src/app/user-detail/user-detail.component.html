@@ -1,1 +1,179 @@
-<p>user-detail works!</p>
+<div class="row w-100">
+    <div class="col-lg-12 col-xlg-12 col-md-7">
+        <div class="card p-5">
+            <div class="card-block">
+                <h4 class="card-title">User Details</h4>
+                <fieldset>
+                     <form class="form-horizontal form-material" (ngSubmit)="Save()">
+                         <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-12" for="userName">User Name:</label>
+                                <div class="col-md-12">
+                                    <input class="form-control form-control-line" type="text" id="userName" name="userName" [(ngModel)]="userdetailsForm.userName" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12" for="firstName">First Name:</label>
+                                    <div class="col-md-12">
+                                        <input class="form-control form-control-line" type="text" id="firstName" name="firstName" [(ngModel)]="userdetailsForm.first_Name" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12" for="lastName">Last Name:</label>
+                                    <div class="col-md-12">
+                                        <input class="form-control form-control-line" type="text" id="lastName" name="lastName" [(ngModel)]="userdetailsForm.last_Name" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12" for="emailId">EmailId:</label>
+                                    <div class="col-md-12">
+                                        <input class="form-control form-control-line" type="text" id="emailId" name="emailId" [(ngModel)]="userdetailsForm.emailId" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-check-input" type="checkbox" id="isAdmin" name="isAdmin" [(ngModel)]="userdetailsForm.isAdmin" />
+                                    <label class="form-check-label" for="isAdmin">Is Admin</label>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row">
+                            <div class="form-group">
+                                <div class="row" *ngIf="userdetailsForm.userId>0">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h3>User Site Details</h3>
+                                                </div>
+                                                <div class="col-md-6 d-flex justify-content-end">
+                                                    <button class="btn m-2 btn-primary" type="button" (click)="AddNewSite('editUserSite')">
+                                                        <i class="mdi mdi-account-card-details" size="10"></i>
+                                                        Add Customer
+                                                    </button> 
+                                                </div>  
+                                            </div>
+                                            <div class="col-md-12" >
+                                                <app-grid-view
+                                                    [columns]="girdColumns"
+                                                    [data]="userdetailsForm.userSites"
+                                                    (editRecord)="onEditRecord($event)"
+                                                    (deleteRecord)="onDeleteRecord($event)">
+                                                </app-grid-view>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success">Save User Information</button>
+                            </div>
+                        </div>
+                     </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="editUserSite" class="modal" tabindex="-1" aria-labelledby="editwingLabel" aria-hidden="true" style="display: none;" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row m-0 w-100">
+                    <div class="col-md-10 d-flex justify-content-start">
+                        <h5 class="modal-title">Customer Details</h5>
+                    </div>
+                    <div class="col-md-2 w-auto d-flex justify-content-end">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="closeUserSiteModal('editUserSite')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-material" (ngSubmit)="SaveUserSite('editUserSite')">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-12" for="userName">User Name:</label>
+                            <div class="col-md-12">
+                                <input class="form-control form-control-line" type="text" id="userName" name="userName" [(ngModel)]="userdetailsForm.userName" required readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                             <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title justify-content-center">User Site Information</h3>
+                                     <div class="form-group">
+                                        <label class="col-lg-12" for="siteId">Site:</label>
+                                        <div class="col-lg-12">
+                                            <select name="siteId" [(ngModel)]="userSite.siteId" class="form-control w-auto form-control-line" title="Select site" aria-label="Select site">
+                                                <option value="" disabled>Select an option</option>
+                                                <option *ngFor="let item of sitelst" [value]="item.siteId">
+                                                    {{ item.display_Name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-check-input" type="checkbox" id="isDefault" name="isDefault" [(ngModel)]="userSite.isDefault" />
+                                        <label class="form-check-label" for="isDefault">Is Default</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success">Save Customer Detail</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="userSiteDeleteConforation" class="modal" tabindex="-1" aria-labelledby="editwingLabel" aria-hidden="true" style="display: none;" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row m-0 w-100">
+            <div class="col-md-10 d-flex justify-content-start">
+                <h5 class="modal-title">Delete Confirmation</h5>
+            </div>
+            <div class="col-md-2 w-auto d-flex justify-content-end">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="closeUserSiteModal('userSiteDeleteConforation')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this user site?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-ds-dismiss="modal" (click)="closeUserSiteModal('userSiteDeleteConforation')">Close</button>
+        <button type="button" class="btn btn-danger" (click)="deleteUserSiteModal('userSiteDeleteConforation')">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

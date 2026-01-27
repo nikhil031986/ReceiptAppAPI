@@ -16,7 +16,7 @@ export class LoginService {
     getHttpOptions() {
     const headers = new HttpHeaders({ 
       'Content-Type': 'application/json; charset=utf-8',  
-      'X-API-KEY':'C10D6AB6-8CBF-45F9-A5C2-4769CE171DF9',
+      //'X-API-KEY':'C10D6AB6-8CBF-45F9-A5C2-4769CE171DF9',
     });
     return { headers: headers };
   }
