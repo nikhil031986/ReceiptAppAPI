@@ -42,4 +42,10 @@ export class UserServiceService {
   deleteUserSite(userSiteId:Number):Observable<any>{
     return this.http.delete(this.apiURl+"/UserMaster/DeleteUserSiteCommand/"+userSiteId, this.getHttpOptions());
   }
+  AddUser(userData:any):Observable<any>{
+    return this.http.post(this.apiURl+"/UserMaster", userData, this.getHttpOptions());
+  }
+  UpdateUser(userId:number,userData:any):Observable<any>{
+    return this.http.post(this.apiURl+"/UserMaster/UpdateUser/"+userId, userData, this.getHttpOptions());
+  }
 }

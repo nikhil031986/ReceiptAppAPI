@@ -18,9 +18,11 @@ namespace Receipt.Infra.Repositories
         {            
             if (expression == null)
             {
-                return await appDbContext.receiptDetails.Include(c => c.Customer).
-                    Include(w => w.WingMaster).
-                    Include(i => i.WingDetail).ToListAsync();
+                return await appDbContext.receiptDetails.
+                                Include(c => c.Customer).
+                                    ThenInclude(c => c.CustomerDetails.Where(d => d.IsMain == true)).
+                                Include(w => w.WingMaster).
+                                Include(i => i.WingDetail).ToListAsync();
             }
             else
             {
@@ -36,7 +38,9 @@ namespace Receipt.Infra.Repositories
 
         public async Task<ReceiptDetail> GetReceipt(int receiptId)
         {
-            return await appDbContext.receiptDetails.Include(c => c.Customer).
+            return await appDbContext.receiptDetails.
+                Include(c => c.Customer).
+                    ThenInclude(c => c.CustomerDetails.Where(d => d.IsMain == true)).
                 Include(w => w.WingMaster).
                 Include(i => i.WingDetail).Where(x => x.ReceiptId == receiptId).FirstOrDefaultAsync();
         }

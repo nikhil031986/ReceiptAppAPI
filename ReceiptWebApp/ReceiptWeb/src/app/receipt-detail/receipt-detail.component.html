@@ -1,0 +1,108 @@
+<div class="receipt-detail" *ngIf="receiptdetailsForm">
+  <h2>Receipt Details</h2>
+
+  <form #receiptForm="ngForm" class="receipt-form">
+    <div class="form-row">
+      <label for="wingMasterId">Wing</label>
+      <select id="wingMasterId" name="wingMasterId" [(ngModel)]="receiptdetailsForm.wingMasterId"
+              (change)="getWingDetails(receiptdetailsForm.wingMasterId); receiptdetailsForm.wingDetailId = 0; receiptdetailsForm.customerId = 0;"
+              required>
+        <option [value]="0">-- Select Wing --</option>
+        <option *ngFor="let w of wingMasterList" [value]="w.wingMasterId">{{ w.displayName || w.displayName || ('Wing ' + w.wingMasterId) }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label for="wingDetailId">Wing Detail</label>
+      <select id="wingDetailId" name="wingDetailId" title="Wing Detail" [(ngModel)]="receiptdetailsForm.wingDetailId"
+              (change)="getcustomer(receiptdetailsForm.wingMasterId, receiptdetailsForm.wingDetailId)"
+              required>
+        <option [value]="0">-- Select Wing Detail --</option>
+        <option *ngFor="let d of wingDetailList" [value]="d.wingDetailId">{{ d.flatNo || d.flatNo || ('Detail ' + d.wingDetailId) }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label for="customerId">Customer</label>
+      <select id="customerId" name="customerId" [(ngModel)]="receiptdetailsForm.customerId" required>
+        <option [value]="0">-- Select Customer --</option>
+        <option *ngFor="let c of customerList" [value]="c.customerId">{{ c.customerDetails[0].customerName || (c.customerDetails[0].customerName) || ('Customer ' + c.customerId) }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label>Receipt No</label>
+      <input type="text" name="receiptNo" [(ngModel)]="receiptdetailsForm.receiptNo" />
+    </div>
+
+    <div class="form-row">
+      <label>Receipt Date</label>
+      <input type="date" name="receiptDate" [(ngModel)]="receiptdetailsForm.receiptDate" />
+    </div>
+
+    <div class="form-row">
+      <label>Payment Date</label>
+      <input type="date" name="paymentDate" [(ngModel)]="receiptdetailsForm.PaymentDate" />
+    </div>
+
+    <div class="form-row">
+      <label>Received As</label>
+      <input type="text" name="receivedAs" [(ngModel)]="receiptdetailsForm.receivedAs" />
+    </div>
+
+    <div class="form-row">
+      <label>Cheque/NEFT/RTGS No</label>
+      <input type="text" name="cheqNeftRtgsNo" [(ngModel)]="receiptdetailsForm.cheqNeftRtgsNo" />
+    </div>
+
+    <div class="form-row">
+      <label>Bank Name</label>
+      <input type="text" name="bankName" [(ngModel)]="receiptdetailsForm.bankName" />
+    </div>
+
+    <div class="form-row">
+      <label>Branch Name</label>
+      <input type="text" name="branchName" [(ngModel)]="receiptdetailsForm.branchName" />
+    </div>
+
+    <div class="form-row">
+      <label>Amount</label>
+      <input type="number" name="amount" [(ngModel)]="receiptdetailsForm.amount" />
+    </div>
+
+    <div class="form-row">
+      <label>Amount (In Words)</label>
+      <input type="text" name="amountInWord" [(ngModel)]="receiptdetailsForm.amountInWord" />
+    </div>
+
+    <div class="form-row">
+      <label>Is Cancelled</label>
+      <input type="checkbox" name="isCancel" [(ngModel)]="receiptdetailsForm.isCancel" />
+    </div>
+
+    <div class="form-row">
+      <label>Print</label>
+      <input type="checkbox" name="IsPrint" [(ngModel)]="receiptdetailsForm.IsPrint" />
+    </div>
+
+    <div class="form-row">
+      <label>Site Id</label>
+      <input type="number" name="siteId" [(ngModel)]="receiptdetailsForm.siteId" />
+    </div>
+
+    <div class="form-row full">
+      <label>Description</label>
+      <textarea name="description" rows="3" [(ngModel)]="receiptdetailsForm.description"></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="backReceiptList()">Back</button>
+      <button type="button" (click)="save()">Print</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="!receiptdetailsForm">
+  <p>Loading receipt details...</p>
+</div>
+<p>receipt-detail works!</p>

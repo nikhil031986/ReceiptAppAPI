@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Receipt.Domain.Entity;
 using Receipt.Domain.Interfaces;
+using Receipt.Infra.CommonFunction;
 using Receipt.Infra.Data;
 
 namespace Receipt.Infra.Repositories
@@ -27,21 +28,37 @@ namespace Receipt.Infra.Repositories
         }
         public async Task<UserMaster> AddUser(UserMaster userMaster)
         {
+            userMaster.CreateuserId = 1;
+            userMaster.CreatedAt = DateTime.Now.ToString("dd/MM/yyyy");
+            userMaster.Password = await PropertyUpdater.GeneratePassword(8);
             appDbContext.userMasters.Add(userMaster);
             await appDbContext.SaveChangesAsync();
+            if(userMaster.usersSite is null || !userMaster.usersSite.Any())
+            {
+                var userSite = new UserSite
+                {
+                    UserId=userMaster.UserId,
+                    SiteId = 1,
+                    IsDefault = true,
+                    CreateuserId = userMaster.CreateuserId,
+                    CreatedAt = userMaster.CreatedAt
+                };
+                appDbContext.userSites.Add(userSite);
+                await appDbContext.SaveChangesAsync();
+            }
             return userMaster;
         }
         
         public async Task<IEnumerable<UserMaster>> GetUserBySiteId(int siteId)
         {
-            var userSites = await appDbContext.userSites
-                                .Where(us => us.SiteId == siteId && us.IsActive == true)
-                                .ToListAsync();
-            var userIds = userSites.Select(us => us.UserId).Distinct().ToList();
+            //var userSites = await appDbContext.userSites
+            //                    .Where(us => us.SiteId == siteId && us.IsActive == true)
+            //                    .ToListAsync();
+            //var userIds = userSites.Select(us => us.UserId).Distinct().ToList();
             var users = await appDbContext.userMasters
-                                .Include(x=> x.usersSite)
+                                .Include(x=> x.usersSite.Where(m=> m.IsActive==true))
                                 .Include(x=> x.siteMasters)
-                                .Where(um => userIds.Contains(um.UserId) && um.IsActive == true)
+                                .Where(um => um.IsActive == true)
                                 .ToListAsync();
             return users;
         }

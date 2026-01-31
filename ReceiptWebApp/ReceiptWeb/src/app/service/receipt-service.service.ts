@@ -29,4 +29,8 @@ export class ReceiptServiceService {
   getReceiptsList():Observable<any>{
     return this.http.get(this.apiURl+"/ReceipDetails/GetReceiptDetailsBySiteId/"+this.localStorageService.getCurrentSiteId(),this.getHttpOptions());
   }
+
+  getReceiptById(receiptId:number):Observable<any>{
+    return this.http.get(this.apiURl+"/ReceipDetails/GetReceiptDetailsById/"+receiptId,this.getHttpOptions());
+  }
 }

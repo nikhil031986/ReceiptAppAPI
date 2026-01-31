@@ -14,7 +14,7 @@ namespace Receipt.Domain.Entity
         public string Address { get; set; }
         public string Password { get; set; }
         public bool? IsAdmin { get; set; }
-        public ICollection<SiteMaster> siteMasters { get;set; }
-        public ICollection<UserSite> usersSite { get; set; }
+        public ICollection<SiteMaster>? siteMasters { get;set; }
+        public ICollection<UserSite>? usersSite { get; set; }
     }
 }

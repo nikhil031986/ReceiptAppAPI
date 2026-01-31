@@ -52,4 +52,8 @@ export class CustomerService {
   deleteCustomerDetail(customerDetailId:number):Observable<any>{
     return this.http.delete(this.apiURl+"/Customer/DeleteCustomerDetail/"+customerDetailId,this.getHttpOptions());
   }
+
+  getCustomerByWing(wingMasterId:number,wingDetailId:number):Observable<any>{
+    return this.http.get(this.apiURl+"/Customer/GetCustomerByWingIdAndWingDetailId/"+wingMasterId+"/"+wingDetailId,this.getHttpOptions());
+  }
 }

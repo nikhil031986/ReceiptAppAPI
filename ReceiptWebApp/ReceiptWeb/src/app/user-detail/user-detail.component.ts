@@ -7,6 +7,7 @@ import { NgFor,NgIf } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { GridViewComponent } from '../grid-view/grid-view.component';
 import { SitesService } from '../service/sites.service';
+import e from 'express';
 
 @Component({
   selector: 'app-user-detail',
@@ -42,6 +43,7 @@ export class UserDetailComponent implements OnInit {
     password: '',
     contactNo: '',
     isAdmin: false,
+    address: '',
     userSites: [] as any[]
   };
   constructor(private userServiceService: UserServiceService,
@@ -56,7 +58,12 @@ export class UserDetailComponent implements OnInit {
     this.localStorageService.isLoggedIn$.subscribe(status => {
       this.isUserLogin = status;
     });
-    this.getUserDetails();
+    if(this.userId>0){
+      this.getUserDetails();
+    }
+    else{
+      this.clearForm();
+    }
     this.getSiteList();
   }
 
@@ -70,21 +77,32 @@ export class UserDetailComponent implements OnInit {
       }
     );
   }
-
+  clearForm():void{
+    this.userdetailsForm={
+      userId: 0,
+      userName: '',
+      first_Name: '',
+      last_Name: '',
+      emailId: '',
+      password: '',
+      contactNo: '',
+      isAdmin: false,
+      address: '',
+      userSites: []
+    };
+  }
   getUserDetails():void{
     this.userServiceService.getUserById(this.userId).subscribe(
       (response) => {
-        this.userdetailsForm={
-          userId: response.userId,
-          userName: response.userName,
-          first_Name: response.first_Name,
-          last_Name: response.last_Name,
-          emailId: response.emailId,
-          password: '',
-          contactNo: response.contactNo,
-          isAdmin: response.isAdmin,
-          userSites: []
-        };
+        this.clearForm();
+        this.userdetailsForm.userId = response.userId;
+        this.userdetailsForm.userName = response.userName;
+        this.userdetailsForm.first_Name = response.first_Name;
+        this.userdetailsForm.last_Name = response.last_Name;
+        this.userdetailsForm.emailId = response.emailId;
+        this.userdetailsForm.password = '';
+        this.userdetailsForm.contactNo = response.contactNo;
+        this.userdetailsForm.isAdmin = response.isAdmin;
         response.usersSite.forEach((element: any) => {
           this.userdetailsForm.userSites.push({
             userSiteId: element.userSiteId,
@@ -103,7 +121,37 @@ export class UserDetailComponent implements OnInit {
   }
 
   Save(): void {
-    // Implement save functionality here
+    if(this.userId===0){
+      this.userdetailsForm.userSites = [];
+      let currentSite = this.localStorageService.getCurrentSiteId();
+      this.userdetailsForm.userSites.push({
+        userSiteId: 0,
+        userId: 0,
+        siteId: currentSite,
+        isDefault: true,
+        siteName: this.sitelst.find(site=>site.siteId===currentSite)?.display_Name || ''
+      });
+      this.userServiceService.AddUser(this.userdetailsForm).subscribe(
+      (response) => {
+        this.toastr.success('User saved successfully.', 'Success');
+        this.router.navigate(['/userlist']);
+      },
+      (error) => {
+        this.toastr.error('Error saving user details.', 'Error');
+      }
+    );
+    }
+    else{
+      this.userServiceService.UpdateUser(this.userId,this.userdetailsForm).subscribe(
+      (response) => {
+        this.toastr.success('User updated successfully.', 'Success');
+        this.router.navigate(['/userlist']);
+      },
+      (error) => {
+        this.toastr.error('Error updating user details.', 'Error');
+      }
+    );
+  }
   }
   AddNewSite(modalId: string): void {
       const modal = document.getElementById(modalId);

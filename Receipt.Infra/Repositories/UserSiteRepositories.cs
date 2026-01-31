@@ -22,7 +22,8 @@ namespace Receipt.Infra.Repositories
         public async Task<UserSite> UpdateUserSite(UserSite userSite)
         {
             var userSiteData = await appDbContext.userSites.SingleOrDefaultAsync(x => x.UserSiteId == userSite.UserSiteId);
-            if (userSiteData is not null)
+           
+            if (userSiteData != null && !appDbContext.userSites.Any(x=> x.UserId==userSite.UserId && x.IsDefault == true))
             {
                 userSiteData.UserId = userSite.UserId;
                 userSiteData.SiteId = userSite.SiteId;

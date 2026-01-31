@@ -20,7 +20,7 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> AddCustomer([FromBody] CustomerMaster customer)
         {
             var result = await sender.Send(new AddCustomerCommand(customer));
-            if(result == null)
+            if (result == null)
             {
                 return BadRequest("Customer Not Added Please try agen.");
             }
@@ -32,7 +32,7 @@ namespace Receipt.API.Controllers
         public async Task<IActionResult> GetCustomer()
         {
             var result = await sender.Send(new GetCustomersCommand());
-            if(result == null)
+            if (result == null)
             {
                 return NotFound();
             }
@@ -91,7 +91,7 @@ namespace Receipt.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCustomer([FromRoute] int customerId)
         {
-            var result= await sender.Send(new DeleteCustomerCommand(customerId));
+            var result = await sender.Send(new DeleteCustomerCommand(customerId));
             if (result == false)
             {
                 return BadRequest("Customer not remove from the system. please try agen.");
@@ -134,6 +134,16 @@ namespace Receipt.API.Controllers
             }
             return Ok(result);
         }
-
+        [HttpGet("GetCustomerByWingIdAndWingDetailId/{wingId}/{wingDetailId}")]
+        [Authorize(Roles = "Client,Admin")]
+        public async Task<IActionResult> GetCustomerByWingIdAndWingDetailId([FromRoute] int wingId, [FromRoute] int wingDetailId)
+        {
+            var result = await sender.Send(new GetCustomerByWingIdAndWingDetailIdCommand(wingId, wingDetailId));
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
     }
 }

@@ -20,7 +20,16 @@ namespace Receipt.Application.Queries
             return await customerRepositories.GetDataFromDB();
         }
     }
-
+    public record GetCustomerByWingIdAndWingDetailIdCommand(int wingId,int wingDetailId):IRequest<IEnumerable<CustomerMaster>>;
+    internal class GetCustomerByWingIdAndWingDetailIdCommandHandler(ICustomerRepositories customerRepositories)
+        : IRequestHandler<GetCustomerByWingIdAndWingDetailIdCommand, IEnumerable<CustomerMaster>>
+    {
+        public async Task<IEnumerable<CustomerMaster>> Handle(GetCustomerByWingIdAndWingDetailIdCommand request, CancellationToken cancellationToken)
+        {
+            var dbData = await customerRepositories.GetDataFromDB(x => x.WingMasterId == request.wingId && x.WingDetailId == request.wingDetailId && x.IsActive == true);
+            return dbData;
+        }
+    }
     public record GetCustomerByIdCommand(int customerId):IRequest<CustomerMaster>;
 
     internal class GetCustomerByIdCommandHandler(ICustomerRepositories customerRepositories)

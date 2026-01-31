@@ -134,7 +134,7 @@ export class ReceiptListComponent implements OnInit  {
     }
 
       openEditWing(wingMasterId:Number):void{
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/wing-details/'+wingMasterId; 
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/receiptdetail/'+wingMasterId; 
         this.router.navigate([returnUrl]);
       } 
 }

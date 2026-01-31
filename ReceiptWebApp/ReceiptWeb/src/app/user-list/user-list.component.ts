@@ -81,7 +81,7 @@ export class UserListComponent implements OnInit {
     this.router.navigate([backlocation]);
   }  
   openuserDetails():void{
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/user-details/'+0; 
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/userdetail/'+0; 
       this.router.navigate([returnUrl]);
   }
 
